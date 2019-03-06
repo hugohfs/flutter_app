@@ -15,7 +15,7 @@ class FirstRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('First Route'),
+        title: Text('Main Page'),
       ),
       body: new Container(
         child: new Column(
