@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "120949150685",
+    "firebase_url": "https://baby-names-app-db-236db.firebaseio.com",
+    "project_id": "baby-names-app-db-236db",
+    "storage_bucket": "baby-names-app-db-236db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120949150685:android:5355117f16783838",
+        "android_client_info": {
+          "package_name": "com.hfs.flutterapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120949150685-kp67p563seg2o7kmmhev62i30gi9nrch.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAF3pZxL1RGKmfV9SOzMEP3BGoQb7Onw8w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
