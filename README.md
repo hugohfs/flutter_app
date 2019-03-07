@@ -1,6 +1,6 @@
-# flutter_app
+# hfs flutter_app
 
-A new Flutter application.
+My first Flutter application.
 
 ## Getting Started
 
