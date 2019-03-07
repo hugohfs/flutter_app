@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/main_StartupNameGenerator.dart';
-import 'package:flutter_app/main_UI.dart';
-import 'package:flutter_app/main_Firebase.dart';
+import 'package:hfs_flutter_app/main_StartupNameGenerator.dart';
+import 'package:hfs_flutter_app/main_UI.dart';
+import 'package:hfs_flutter_app/main_Firebase.dart';
 
 void main() {
   runApp(MaterialApp(

@@ -1,5 +1,5 @@
-name: flutter_app
-description: A new Flutter application.
+name: hfs_flutter_app
+description: HFS first Flutter application.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -21,12 +21,14 @@ dependencies:
   cupertino_icons: ^0.1.2
   english_words: ^3.1.0
 
-  #cloud_firestore: ^0.9.5
-  #cloud_firestore: ^0.8.1
-
+  #firebase_auth: ^0.8.1+4
   firebase_auth: ^0.6.6
   firebase_database: ^1.0.5
-  ##firebase_core: 0.3.1+1
+  #cloud_firestore: ^0.8.2
+  #firebase_core: 0.3.1+1
+  #firebase_core: ^0.2.5+1
+  #cloud_firestore: ^0.9.5+2
+  #cloud_firestore: 0.6.3 #no conflict but error .snapshot
 
 
 dev_dependencies:
@@ -44,6 +46,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/flutter-icon.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -75,6 +80,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages
-
-#assets:
-#  - assets/flutter-icon.png
