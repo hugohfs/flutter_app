@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
-import 'package:hfs_flutter_app/main_UI.dart';
-import 'package:hfs_flutter_app/main_Firebase.dart';
+import 'package:hfs_flutter_app/pages/main_UI.dart';
+import 'package:hfs_flutter_app/pages/main_Firebase.dart';
 
 void main() => runApp(StartupNameGenerator());
 

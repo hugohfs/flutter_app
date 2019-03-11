@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hfs_flutter_app/pages/login_signup_page.dart';
 import 'package:hfs_flutter_app/services/authentication.dart';
+//import 'package:hfs_flutter_app/pages/todo_page.dart';
 import 'package:hfs_flutter_app/pages/home_page.dart';
 
 class RootPage extends StatefulWidget {
@@ -82,6 +83,10 @@ class _RootPageState extends State<RootPage> {
             userId: _userId,
             auth: widget.auth,
             onSignedOut: _onSignedOut,
+          /*return new TodoPage(
+            userId: _userId,
+            auth: widget.auth,
+            onSignedOut: _onSignedOut,*/
           );
         } else return _buildWaitingScreen();
         break;
