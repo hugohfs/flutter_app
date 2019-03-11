@@ -20,8 +20,6 @@ class _HomePageState extends State<HomePage> {
   final FirebaseDatabase _database = FirebaseDatabase.instance;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  Query _todoQuery;
-
   bool _isEmailVerified = false;
 
   String _userEmail = "";
