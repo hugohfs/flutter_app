@@ -37,7 +37,6 @@ class _HomePageState extends State<HomePage> {
         }
       });
     });
-
   }
 
   void _checkEmailVerification() async {
@@ -127,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                 onPressed: _signOut)
           ],
         ),
-        body: MainMenu(),
+        body: MainMenuPage(auth: widget.auth,),
     );
   }
 }

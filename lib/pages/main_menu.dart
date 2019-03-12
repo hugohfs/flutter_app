@@ -3,8 +3,32 @@ import 'package:hfs_flutter_app/pages/startup_name_generator.dart';
 import 'package:hfs_flutter_app/pages/friendly_chat.dart';
 import 'package:hfs_flutter_app/pages/baby_name_votes.dart';
 import 'package:hfs_flutter_app/pages/todo_page.dart';
+import 'package:hfs_flutter_app/services/authentication.dart';
 
+//class _MainMenuState extends State<MainMenu> {
 class MainMenu extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MainMenuPage();
+  }
+}
+
+class MainMenuPage extends StatefulWidget {
+  MainMenuPage({Key key, this.auth})
+      : super(key: key);
+
+  final BaseAuth auth;
+
+
+  @override
+  _MainMenuPageState createState() {
+    return _MainMenuPageState();
+  }
+}
+
+class _MainMenuPageState extends State<MainMenuPage> {
+
+//class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +71,7 @@ class MainMenu extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => FriendlyChatApp()),
+                      MaterialPageRoute(builder: (context) => ChatScreen(auth: widget.auth,)),
                   );
                 },
               ),

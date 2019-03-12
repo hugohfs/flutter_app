@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hfs_flutter_app/pages/login_signup_page.dart';
 import 'package:hfs_flutter_app/services/authentication.dart';
-//import 'package:hfs_flutter_app/pages/todo_page.dart';
 import 'package:hfs_flutter_app/pages/home_page.dart';
+
+enum AuthStatus {
+  NOT_DETERMINED,
+  NOT_LOGGED_IN,
+  LOGGED_IN,
+}
 
 class RootPage extends StatefulWidget {
   RootPage({this.auth});
@@ -11,12 +16,6 @@ class RootPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => new _RootPageState();
-}
-
-enum AuthStatus {
-  NOT_DETERMINED,
-  NOT_LOGGED_IN,
-  LOGGED_IN,
 }
 
 class _RootPageState extends State<RootPage> {

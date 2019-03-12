@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:hfs_flutter_app/services/authentication.dart';
 
-const String _name = "Name sender";
+String _userEmail = "";
 
 final ThemeData kIOSTheme = new ThemeData(
   primarySwatch: Colors.orange,
@@ -15,14 +16,19 @@ final ThemeData kDefaultTheme = new ThemeData(
   primaryColor: Colors.indigo,
 );
 
-class FriendlyChatApp extends StatelessWidget {
+/*class FriendlyChatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChatScreen();
   }
-}
+}*/
 
 class ChatScreen extends StatefulWidget {
+  ChatScreen({Key key, this.auth})
+      : super(key: key);
+
+  final BaseAuth auth;
+
   @override
   State createState() => new ChatScreenState();
 }
@@ -31,6 +37,18 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   final List<ChatMessage> _messages = <ChatMessage>[];
   final TextEditingController _textController = new TextEditingController();
   bool _isComposing = false;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.auth.getCurrentUser().then((user) {
+      setState(() {
+        if (user != null) {
+          _userEmail = user?.email;
+        }
+      });
+    });
+  }
 
   @override
   void dispose() {
@@ -150,13 +168,13 @@ class ChatMessage extends StatelessWidget {
             children: <Widget>[
               new Container(
                 margin: const EdgeInsets.only(right: 16.0),
-                child: new CircleAvatar(child: new Text(_name[0])),
+                child: new CircleAvatar(child: new Text(_userEmail[0])),
               ),
               new Expanded(
                 child: new Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    new Text(_name, style: Theme.of(context).textTheme.subhead),
+                    new Text(_userEmail, style: Theme.of(context).textTheme.subhead),
                     new Container(
                       margin: const EdgeInsets.only(top: 5.0),
                       child: new Text(text),
