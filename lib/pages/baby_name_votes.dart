@@ -1,34 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(BabyNameVotes());
-
-final dummySnapshot = [
-  {"name": "Filip", "votes": 15},
-  {"name": "Abraham", "votes": 14},
-  {"name": "Richard", "votes": 11},
-  {"name": "Ike", "votes": 10},
-  {"name": "Justin", "votes": 1},
-];
-
 class BabyNameVotes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Baby Name Votes',
-      home: MyHomePage(),
-    );
+    return BabyNameVotesPage();
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class BabyNameVotesPage extends StatefulWidget {
   @override
-  _MyHomePageState createState() {
-    return _MyHomePageState();
+  _BabyNameVotesPageState createState() {
+    return _BabyNameVotesPageState();
   }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _BabyNameVotesPageState extends State<BabyNameVotesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

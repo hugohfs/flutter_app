@@ -28,8 +28,6 @@ class _TodoPageState extends State<TodoPage> {
 
   Query _todoQuery;
 
-  bool _isEmailVerified = false;
-
   @override
   void initState() {
     super.initState();
@@ -182,7 +180,7 @@ class _TodoPageState extends State<TodoPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text('HFS Flutter Firebase Home'),
+          title: new Text('Todo List Firebase' ),
           actions: <Widget>[
             new FlatButton(
                 child: new Text('Logout',

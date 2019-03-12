@@ -83,10 +83,6 @@ class _RootPageState extends State<RootPage> {
             userId: _userId,
             auth: widget.auth,
             onSignedOut: _onSignedOut,
-          /*return new TodoPage(
-            userId: _userId,
-            auth: widget.auth,
-            onSignedOut: _onSignedOut,*/
           );
         } else return _buildWaitingScreen();
         break;

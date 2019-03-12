@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
-void main() {
-  runApp(new FriendlyChatApp());
-}
-
 const String _name = "Name sender";
 
 final ThemeData kIOSTheme = new ThemeData(
@@ -22,13 +18,7 @@ final ThemeData kDefaultTheme = new ThemeData(
 class FriendlyChatApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: "Friendly Chat",
-      theme: defaultTargetPlatform == TargetPlatform.iOS
-          ? kIOSTheme
-          : kDefaultTheme,
-      home: new ChatScreen(),
-    );
+    return ChatScreen();
   }
 }
 

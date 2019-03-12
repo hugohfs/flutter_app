@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hfs_flutter_app/pages/main_StartupNameGenerator.dart';
-import 'package:hfs_flutter_app/pages/main_UI.dart';
-import 'package:hfs_flutter_app/pages/main_Firebase.dart';
+import 'package:hfs_flutter_app/pages/startup_name_generator.dart';
+import 'package:hfs_flutter_app/pages/friendly_chat.dart';
+import 'package:hfs_flutter_app/pages/baby_name_votes.dart';
 import 'package:hfs_flutter_app/pages/todo_page.dart';
-
-void main() {
-  runApp(MaterialApp(
-    title: 'Navigation Basics',
-    home: MainMenu(),
-  ));
-}
 
 class MainMenu extends StatelessWidget {
   @override

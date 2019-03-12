@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:hfs_flutter_app/pages/main_StartupNameGenerator.dart';
+import 'package:hfs_flutter_app/pages/startup_name_generator.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

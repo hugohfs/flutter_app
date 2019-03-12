@@ -1,20 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
-import 'package:hfs_flutter_app/pages/main_UI.dart';
-import 'package:hfs_flutter_app/pages/main_Firebase.dart';
-
-void main() => runApp(StartupNameGenerator());
 
 class StartupNameGenerator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Startup Name Generator',
-      theme: new ThemeData(
-        primaryColor: Colors.white,
-      ),
-      home: RandomWords(),
-    );
+    return RandomWords();
   }
 }
 
