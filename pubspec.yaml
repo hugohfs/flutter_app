@@ -21,6 +21,9 @@ dependencies:
   cupertino_icons: ^0.1.2
   english_words: ^3.1.0
 
+  #Open Food Facts
+  json_annotation: ^2.0.0
+
   #firebase_auth: ^0.8.1+4
   firebase_auth: ^0.6.6
   firebase_database: ^1.0.5
@@ -31,9 +34,14 @@ dependencies:
   #cloud_firestore: 0.6.3 #no conflict but error .snapshot
 
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  #Open Food Facts
+  build_runner: ^1.0.0
+  json_serializable: ^2.0.0
 
 
 # For information on the generic Dart part of this file, see the
@@ -49,6 +57,7 @@ flutter:
 
   assets:
     - assets/flutter-icon.png
+    - assets/Open_Food_Facts_JSON_Example_HFS.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:
