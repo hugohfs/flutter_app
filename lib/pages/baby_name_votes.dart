@@ -16,17 +16,28 @@ class BabyNameVotesPage extends StatefulWidget {
 }
 
 class _BabyNameVotesPageState extends State<BabyNameVotesPage> {
+  final _textEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Baby Name Votes')),
-      body: _buildBody(context),
-    );
+        appBar: AppBar(title: Text('Baby Name Votes')),
+        body: _buildBody(context),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            _showDialogAdd(context);
+          },
+          tooltip: 'Increment',
+          child: Icon(Icons.add),
+        ));
   }
 
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('baby').orderBy('votes',descending: true).snapshots(),
+      stream: Firestore.instance
+          .collection('baby')
+          .orderBy('votes', descending: true)
+          .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LinearProgressIndicator();
 
@@ -35,7 +46,7 @@ class _BabyNameVotesPageState extends State<BabyNameVotesPage> {
     );
   }
 
-  Widget _buildList(BuildContext context,List<DocumentSnapshot> snapshot) {
+  Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
     return ListView(
       padding: const EdgeInsets.only(top: 20.0),
       children: snapshot.map((data) => _buildListItem(context, data)).toList(),
@@ -57,15 +68,108 @@ class _BabyNameVotesPageState extends State<BabyNameVotesPage> {
           title: Text(record.name),
           trailing: Text(record.votes.toString()),
           onTap: () => Firestore.instance.runTransaction((transaction) async {
-            final freshSnapshot = await transaction.get(record.reference);
-            final fresh = Record.fromSnapshot(freshSnapshot);
+                final freshSnapshot = await transaction.get(record.reference);
+                final fresh = Record.fromSnapshot(freshSnapshot);
 
-            await transaction
-                .update(record.reference, {'votes': fresh.votes + 1});
-          })
+                await transaction
+                    .update(record.reference, {'votes': fresh.votes + 1});
+              }),
+          onLongPress: () {
+            _showDialogDelete(context, record);
+          },
         ),
       ),
     );
+  }
+
+  _showDialogDelete(BuildContext context, Record record) async {
+    await showDialog<String>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: new Row(
+              children: <Widget>[
+                new Expanded(
+                  child: new Text('Do you want to delete the name?'),
+                )
+              ],
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                  child: const Text('No'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+              new FlatButton(
+                  child: const Text('Yes'),
+                  onPressed: () {
+                    _deleteBabyName(record);
+                    Navigator.pop(context);
+                  })
+            ],
+          );
+        });
+  }
+
+  _showDialogAdd(BuildContext context) async {
+    _textEditingController.clear();
+    await showDialog<String>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: new Row(
+              children: <Widget>[
+                new Expanded(
+                    child: new TextField(
+                  controller: _textEditingController,
+                  autofocus: true,
+                  decoration: new InputDecoration(
+                    labelText: 'Add new baby name',
+                  ),
+                ))
+              ],
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                  child: const Text('Cancel'),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+              new FlatButton(
+                  child: const Text('Add'),
+                  onPressed: () {
+                    _addNewBabyName(_textEditingController.text.toString());
+                    Navigator.pop(context);
+                  })
+            ],
+          );
+        });
+  }
+
+  _addNewBabyName(String babyName) {
+    if (babyName.length > 0) {
+      Map<String, dynamic> newRecord = {
+        'name': babyName.toString(),
+        'votes': 0,
+      };
+
+      CollectionReference dbBaby = Firestore.instance.collection('baby');
+
+      Firestore.instance.runTransaction((Transaction tx) async {
+        //TODO: check if already exists
+        var _result = await dbBaby.add(newRecord);
+        print(_result);
+      });
+    }
+  }
+
+  _deleteBabyName(Record record) {
+    Firestore.instance.runTransaction((transaction) async {
+      final freshSnapshot = await transaction.get(record.reference);
+      final fresh = Record.fromSnapshot(freshSnapshot);
+
+      await transaction.delete(fresh.reference);
+    });
   }
 }
 
