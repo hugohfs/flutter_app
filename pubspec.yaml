@@ -10,7 +10,7 @@ description: HFS first Flutter application.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -23,6 +23,7 @@ dependencies:
 
   #Open Food Facts
   json_annotation: ^2.0.0
+  http: 0.12.0+1
 
   #firebase_auth: ^0.8.1+4
   firebase_auth: ^0.6.6

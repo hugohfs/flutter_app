@@ -158,276 +158,382 @@ class Product {
 
   Product(
       {this.categoriesPrevHierarchy,
-        this.entryDatesTags,
-        this.servingQuantity,
-        this.sId,
-        this.pnnsGroups2,
-        this.pnnsGroups2Tags,
-        this.languagesTags,
-        this.brandsDebugTags,
-        this.imageFrontUrl,
-        this.stores,
-        this.origins,
-        this.productNameFrDebugTags,
-        this.genericNameFr,
-        this.additivesOldN,
-        this.nutritionDataPerDebugTags,
-        this.expirationDateDebugTags,
-        this.codesTags,
-        this.additivesDebugTags,
-        this.labelsHierarchy,
-        this.citiesTags,
-        this.informersTags,
-        this.imageIngredientsSmallUrl,
-        this.lKeywords,
-        this.pnnsGroups1Tags,
-        this.nutritionScoreDebug,
-        this.images,
-        this.ingredientsTextDebug,
-        this.lastEditor,
-        this.allergensHierarchy,
-        this.categoriesDebugTags,
-        this.countries,
-        this.imageFrontSmallUrl,
-        this.storesDebugTags,
-        this.nutriments,
-        this.countriesHierarchy,
-        this.lang,
-        this.languagesHierarchy,
-        this.expirationDate,
-        this.lastModifiedT,
-        this.genericName,
-        this.nutrientLevels,
-        this.originsTags,
-        this.noNutritionData,
-        this.ingredientsFromPalmOilN,
-        this.createdT,
-        this.labelsDebugTags,
-        this.lastImageDatesTags,
-        this.ingredientsN,
-        this.sortkey,
-        this.categoriesTags,
-        this.countriesDebugTags,
-        this.ingredientsTextWithAllergens,
-        this.pnnsGroups1,
-        this.quantityDebugTags,
-        this.embCodes,
-        this.packaging,
-        this.embCodesOrig,
-        this.imageNutritionSmallUrl,
-        this.correctorsTags,
-        this.tracesHierarchy,
-        this.storesTags,
-        this.lastEditDatesTags,
-        this.labelsPrevTags,
-        this.statesTags,
-        this.imageSmallUrl,
-        this.quantity,
-        this.additivesOldTags,
-        this.imageIngredientsThumbUrl,
-        this.ingredientsNTags,
-        this.tracesDebugTags,
-        this.statesHierarchy,
-        this.labelsTags,
-        this.purchasePlacesDebugTags,
-        this.states,
-        this.imageUrl,
-        this.link,
-        this.allergens,
-        this.labelsPrevHierarchy,
-        this.servingSize,
-        this.interfaceVersionCreated,
-        this.allergensTags,
-        this.imageThumbUrl,
-        this.unknownNutrientsTags,
-        this.ingredientsIdsDebug,
-        this.lastModifiedBy,
-        this.categoriesHierarchy,
-        this.fruitsVegetablesNuts100gEstimate,
-        this.interfaceVersionModified,
-        this.nutritionGrades,
-        this.nutritionGradeFr,
-        this.purchasePlacesTags,
-        this.rev,
-        this.ingredientsThatMayBeFromPalmOilTags,
-        this.brands,
-        this.imageFrontThumbUrl,
-        this.countriesTags,
-        this.ingredientsTextFr,
-        this.code,
-        this.debugParamSortedLangs,
-        this.ingredientsTextWithAllergensFr,
-        this.ingredientsTags,
-        this.brandsTags,
-        this.manufacturingPlaces,
-        this.lc,
-        this.manufacturingPlacesTags,
-        this.imageIngredientsUrl,
-        this.productName,
-        this.additivesPrev,
-        this.ingredients,
-        this.nutrientLevelsTags,
-        this.additivesN,
-        this.embCodesTags,
-        this.packagingTags,
-        this.tracesTags,
-        this.labels,
-        this.editorsTags,
-        this.embCodesDebugTags,
-        this.productNameFr,
-        this.categories,
-        this.maxImgid,
-        this.purchasePlaces,
-        this.nutritionDataPer,
-        this.additivesPrevTags,
-        this.complete,
-        this.additivesPrevN,
-        this.manufacturingPlacesDebugTags,
-        this.additives,
-        this.ingredientsText,
-        this.additivesTags,
-        this.nutritionGradesTags,
-        this.nutritionScoreWarningNoFiber,
-        this.checkersTags,
-        this.labelsNextHierarchy,
-        this.traces,
-        this.ingredientsDebug,
-        this.completedT,
-        this.ingredientsTextFrDebugTags,
-        this.ingredientsFromPalmOilTags,
-        this.imageNutritionThumbUrl,
-        this.packagingDebugTags,
-        this.servingSizeDebugTags,
-        this.categoriesPrevTags,
-        this.labelsNextTags,
-        this.creator,
-        this.langDebugTags,
-        this.languages,
-        this.lastImageT,
-        this.photographersTags,
-        this.linkDebugTags,
-        this.genericNameFrDebugTags,
-        this.ingredientsFromOrThatMayBeFromPalmOilN,
-        this.ingredientsThatMayBeFromPalmOilN,
-        this.languagesCodes,
-        this.originsDebugTags,
-        this.imageNutritionUrl,
-        this.id});
+      this.entryDatesTags,
+      this.servingQuantity,
+      this.sId,
+      this.pnnsGroups2,
+      this.pnnsGroups2Tags,
+      this.languagesTags,
+      this.brandsDebugTags,
+      this.imageFrontUrl,
+      this.stores,
+      this.origins,
+      this.productNameFrDebugTags,
+      this.genericNameFr,
+      this.additivesOldN,
+      this.nutritionDataPerDebugTags,
+      this.expirationDateDebugTags,
+      this.codesTags,
+      this.additivesDebugTags,
+      this.labelsHierarchy,
+      this.citiesTags,
+      this.informersTags,
+      this.imageIngredientsSmallUrl,
+      this.lKeywords,
+      this.pnnsGroups1Tags,
+      this.nutritionScoreDebug,
+      this.images,
+      this.ingredientsTextDebug,
+      this.lastEditor,
+      this.allergensHierarchy,
+      this.categoriesDebugTags,
+      this.countries,
+      this.imageFrontSmallUrl,
+      this.storesDebugTags,
+      this.nutriments,
+      this.countriesHierarchy,
+      this.lang,
+      this.languagesHierarchy,
+      this.expirationDate,
+      this.lastModifiedT,
+      this.genericName,
+      this.nutrientLevels,
+      this.originsTags,
+      this.noNutritionData,
+      this.ingredientsFromPalmOilN,
+      this.createdT,
+      this.labelsDebugTags,
+      this.lastImageDatesTags,
+      this.ingredientsN,
+      this.sortkey,
+      this.categoriesTags,
+      this.countriesDebugTags,
+      this.ingredientsTextWithAllergens,
+      this.pnnsGroups1,
+      this.quantityDebugTags,
+      this.embCodes,
+      this.packaging,
+      this.embCodesOrig,
+      this.imageNutritionSmallUrl,
+      this.correctorsTags,
+      this.tracesHierarchy,
+      this.storesTags,
+      this.lastEditDatesTags,
+      this.labelsPrevTags,
+      this.statesTags,
+      this.imageSmallUrl,
+      this.quantity,
+      this.additivesOldTags,
+      this.imageIngredientsThumbUrl,
+      this.ingredientsNTags,
+      this.tracesDebugTags,
+      this.statesHierarchy,
+      this.labelsTags,
+      this.purchasePlacesDebugTags,
+      this.states,
+      this.imageUrl,
+      this.link,
+      this.allergens,
+      this.labelsPrevHierarchy,
+      this.servingSize,
+      this.interfaceVersionCreated,
+      this.allergensTags,
+      this.imageThumbUrl,
+      this.unknownNutrientsTags,
+      this.ingredientsIdsDebug,
+      this.lastModifiedBy,
+      this.categoriesHierarchy,
+      this.fruitsVegetablesNuts100gEstimate,
+      this.interfaceVersionModified,
+      this.nutritionGrades,
+      this.nutritionGradeFr,
+      this.purchasePlacesTags,
+      this.rev,
+      this.ingredientsThatMayBeFromPalmOilTags,
+      this.brands,
+      this.imageFrontThumbUrl,
+      this.countriesTags,
+      this.ingredientsTextFr,
+      this.code,
+      this.debugParamSortedLangs,
+      this.ingredientsTextWithAllergensFr,
+      this.ingredientsTags,
+      this.brandsTags,
+      this.manufacturingPlaces,
+      this.lc,
+      this.manufacturingPlacesTags,
+      this.imageIngredientsUrl,
+      this.productName,
+      this.additivesPrev,
+      this.ingredients,
+      this.nutrientLevelsTags,
+      this.additivesN,
+      this.embCodesTags,
+      this.packagingTags,
+      this.tracesTags,
+      this.labels,
+      this.editorsTags,
+      this.embCodesDebugTags,
+      this.productNameFr,
+      this.categories,
+      this.maxImgid,
+      this.purchasePlaces,
+      this.nutritionDataPer,
+      this.additivesPrevTags,
+      this.complete,
+      this.additivesPrevN,
+      this.manufacturingPlacesDebugTags,
+      this.additives,
+      this.ingredientsText,
+      this.additivesTags,
+      this.nutritionGradesTags,
+      this.nutritionScoreWarningNoFiber,
+      this.checkersTags,
+      this.labelsNextHierarchy,
+      this.traces,
+      this.ingredientsDebug,
+      this.completedT,
+      this.ingredientsTextFrDebugTags,
+      this.ingredientsFromPalmOilTags,
+      this.imageNutritionThumbUrl,
+      this.packagingDebugTags,
+      this.servingSizeDebugTags,
+      this.categoriesPrevTags,
+      this.labelsNextTags,
+      this.creator,
+      this.langDebugTags,
+      this.languages,
+      this.lastImageT,
+      this.photographersTags,
+      this.linkDebugTags,
+      this.genericNameFrDebugTags,
+      this.ingredientsFromOrThatMayBeFromPalmOilN,
+      this.ingredientsThatMayBeFromPalmOilN,
+      this.languagesCodes,
+      this.originsDebugTags,
+      this.imageNutritionUrl,
+      this.id});
 
   Product.fromJson(Map<String, dynamic> json) {
-    categoriesPrevHierarchy = json['categories_prev_hierarchy'];
-    entryDatesTags = json['entry_dates_tags'];
+    categoriesPrevHierarchy =
+    categoriesPrevHierarchy =
+        json.containsKey('categories_prev_hierarchy') == true
+            ? json['categories_prev_hierarchy'].cast<String>()
+            : null;
+    entryDatesTags = json.containsKey('entry_dates_tags') == true
+        ? json['entry_dates_tags'].cast<String>()
+        : null;
     servingQuantity = json['serving_quantity'];
     sId = json['_id'];
     pnnsGroups2 = json['pnns_groups_2'];
-    pnnsGroups2Tags = json['pnns_groups_2_tags'];
-    languagesTags = json['languages_tags'];
-    brandsDebugTags = json['brands_debug_tags'];
+    pnnsGroups2Tags = json.containsKey('pnns_groups_2_tags') == true
+        ? json['pnns_groups_2_tags'].cast<String>()
+        : null;
+    languagesTags = json.containsKey('languages_tags') == true
+        ? json['languages_tags'].cast<String>()
+        : null;
+    brandsDebugTags = json.containsKey('brands_debug_tags') == true
+        ? json['brands_debug_tags'].cast<String>()
+        : null;
     imageFrontUrl = json['image_front_url'];
     stores = json['stores'];
     origins = json['origins'];
-    productNameFrDebugTags = json['product_name_fr_debug_tags'];
+    productNameFrDebugTags =
+        json.containsKey('product_name_fr_debug_tags') == true
+            ? json['product_name_fr_debug_tags'].cast<String>()
+            : null;
     genericNameFr = json['generic_name_fr'];
     additivesOldN = json['additives_old_n'];
     nutritionDataPerDebugTags =
-        json['nutrition_data_per_debug_tags'];
-    expirationDateDebugTags = json['expiration_date_debug_tags'];
-    codesTags = json['codes_tags'];
-    additivesDebugTags = json['additives_debug_tags'];
-    labelsHierarchy = json['labels_hierarchy'];
-    citiesTags = json['cities_tags'];
-    informersTags = json['informers_tags'];
+        json.containsKey('nutrition_data_per_debug_tags') == true
+            ? json['nutrition_data_per_debug_tags'].cast<String>()
+            : null;
+    expirationDateDebugTags =
+        json.containsKey('expiration_date_debug_tags') == true
+            ? json['expiration_date_debug_tags'].cast<String>()
+            : null;
+    codesTags = json.containsKey('codes_tags') == true
+        ? json['codes_tags'].cast<String>()
+        : null;
+    additivesDebugTags = json.containsKey('additives_debug_tags') == true
+        ? json['additives_debug_tags'].cast<String>()
+        : null;
+    labelsHierarchy = json.containsKey('labels_hierarchy') == true
+        ? json['labels_hierarchy'].cast<String>()
+        : null;
+    citiesTags = json.containsKey('cities_tags') == true
+        ? json['cities_tags'].cast<String>()
+        : null;
+    informersTags = json.containsKey('informers_tags') == true
+        ? json['informers_tags'].cast<String>()
+        : null;
     imageIngredientsSmallUrl = json['image_ingredients_small_url'];
-    lKeywords = json['_keywords'];
-    pnnsGroups1Tags = json['pnns_groups_1_tags'];
+    lKeywords = json.containsKey('_keywords') == true
+        ? json['_keywords'].cast<String>()
+        : null;
+    pnnsGroups1Tags = json.containsKey('pnns_groups_1_tags') == true
+        ? json['pnns_groups_1_tags'].cast<String>()
+        : null;
     nutritionScoreDebug = json['nutrition_score_debug'];
     images =
-    json['images'] != null ? new Images.fromJson(json['images']) : null;
+        json['images'] != null ? new Images.fromJson(json['images']) : null;
     ingredientsTextDebug = json['ingredients_text_debug'];
     lastEditor = json['last_editor'];
-    allergensHierarchy = json['allergens_hierarchy'];
-    categoriesDebugTags = json['categories_debug_tags'];
+    allergensHierarchy = json.containsKey('allergens_hierarchy') == true
+        ? json['allergens_hierarchy'].cast<String>()
+        : null;
+    categoriesDebugTags = json.containsKey('categories_debug_tags') == true
+        ? json['categories_debug_tags'].cast<String>()
+        : null;
     countries = json['countries'];
     imageFrontSmallUrl = json['image_front_small_url'];
-    storesDebugTags = json['stores_debug_tags'];
+    storesDebugTags = json.containsKey('stores_debug_tags') == true
+        ? json['stores_debug_tags'].cast<String>()
+        : null;
     nutriments = json['nutriments'] != null
         ? new Nutriments.fromJson(json['nutriments'])
         : null;
-    countriesHierarchy = json['countries_hierarchy'];
+    countriesHierarchy = json.containsKey('countries_hierarchy') == true
+        ? json['countries_hierarchy'].cast<String>()
+        : null;
     lang = json['lang'];
-    languagesHierarchy = json['languages_hierarchy'];
+    languagesHierarchy = json.containsKey('languages_hierarchy') == true
+        ? json['languages_hierarchy'].cast<String>()
+        : null;
     expirationDate = json['expiration_date'];
     lastModifiedT = json['last_modified_t'];
     genericName = json['generic_name'];
     nutrientLevels = json['nutrient_levels'] != null
         ? new NutrientLevels.fromJson(json['nutrient_levels'])
         : null;
-    originsTags = json['origins_tags'];
+    originsTags = json.containsKey('origins_tags') == true
+        ? json['origins_tags'].cast<String>()
+        : null;
     noNutritionData = json['no_nutrition_data'];
     ingredientsFromPalmOilN = json['ingredients_from_palm_oil_n'];
     createdT = json['created_t'];
-    labelsDebugTags = json['labels_debug_tags'];
-    lastImageDatesTags = json['last_image_dates_tags'];
+    labelsDebugTags = json.containsKey('labels_debug_tags') == true
+        ? json['labels_debug_tags'].cast<String>()
+        : null;
+    lastImageDatesTags = json.containsKey('last_image_dates_tags') == true
+        ? json['last_image_dates_tags'].cast<String>()
+        : null;
     ingredientsN = json['ingredients_n'];
     sortkey = json['sortkey'];
-    categoriesTags = json['categories_tags'];
-    countriesDebugTags = json['countries_debug_tags'];
+    categoriesTags = json.containsKey('categories_tags') == true
+        ? json['categories_tags'].cast<String>()
+        : null;
+    countriesDebugTags = json.containsKey('countries_debug_tags') == true
+        ? json['countries_debug_tags'].cast<String>()
+        : null;
     ingredientsTextWithAllergens = json['ingredients_text_with_allergens'];
     pnnsGroups1 = json['pnns_groups_1'];
-    quantityDebugTags = json['quantity_debug_tags'];
+    quantityDebugTags = json.containsKey('quantity_debug_tags') == true
+        ? json['quantity_debug_tags'].cast<String>()
+        : null;
     embCodes = json['emb_codes'];
     packaging = json['packaging'];
     embCodesOrig = json['emb_codes_orig'];
     imageNutritionSmallUrl = json['image_nutrition_small_url'];
-    correctorsTags = json['correctors_tags'];
-    tracesHierarchy = json['traces_hierarchy'];
-    storesTags = json['stores_tags'];
-    lastEditDatesTags = json['last_edit_dates_tags'];
-    labelsPrevTags = json['labels_prev_tags'];
-    statesTags = json['states_tags'];
+    correctorsTags = json.containsKey('correctors_tags') == true
+        ? json['correctors_tags'].cast<String>()
+        : null;
+    tracesHierarchy = json.containsKey('traces_hierarchy') == true
+        ? json['traces_hierarchy'].cast<String>()
+        : null;
+    storesTags = json.containsKey('stores_tags') == true
+        ? json['stores_tags'].cast<String>()
+        : null;
+    lastEditDatesTags = json.containsKey('last_edit_dates_tags') == true
+        ? json['last_edit_dates_tags'].cast<String>()
+        : null;
+    labelsPrevTags = json.containsKey('labels_prev_tags') == true
+        ? json['labels_prev_tags'].cast<String>()
+        : null;
+    statesTags = json.containsKey('states_tags') == true
+        ? json['states_tags'].cast<String>()
+        : null;
     imageSmallUrl = json['image_small_url'];
     quantity = json['quantity'];
-    additivesOldTags = json['additives_old_tags'];
+    additivesOldTags = json.containsKey('additives_old_tags') == true
+        ? json['additives_old_tags'].cast<String>()
+        : null;
     imageIngredientsThumbUrl = json['image_ingredients_thumb_url'];
-    ingredientsNTags = json['ingredients_n_tags'];
-    tracesDebugTags = json['traces_debug_tags'];
-    statesHierarchy = json['states_hierarchy'];
-    labelsTags = json['labels_tags'];
-    purchasePlacesDebugTags = json['purchase_places_debug_tags'];
+    ingredientsNTags = json.containsKey('ingredients_n_tags') == true
+        ? json['ingredients_n_tags'].cast<String>()
+        : null;
+    tracesDebugTags = json.containsKey('traces_debug_tags') == true
+        ? json['traces_debug_tags'].cast<String>()
+        : null;
+    statesHierarchy = json.containsKey('states_hierarchy') == true
+        ? json['states_hierarchy'].cast<String>()
+        : null;
+    labelsTags = json.containsKey('labels_tags') == true
+        ? json['labels_tags'].cast<String>()
+        : null;
+    purchasePlacesDebugTags =
+        json.containsKey('purchase_places_debug_tags') == true
+            ? json['purchase_places_debug_tags'].cast<String>()
+            : null;
     states = json['states'];
     imageUrl = json['image_url'];
     link = json['link'];
     allergens = json['allergens'];
-    labelsPrevHierarchy = json['labels_prev_hierarchy'];
+    labelsPrevHierarchy = json.containsKey('labels_prev_hierarchy') == true
+        ? json['labels_prev_hierarchy'].cast<String>()
+        : null;
     servingSize = json['serving_size'];
     interfaceVersionCreated = json['interface_version_created'];
-    allergensTags = json['allergens_tags'];
+    allergensTags = json.containsKey('allergens_tags') == true
+        ? json['allergens_tags'].cast<String>()
+        : null;
     imageThumbUrl = json['image_thumb_url'];
-    unknownNutrientsTags = json['unknown_nutrients_tags'];
-    ingredientsIdsDebug = json['ingredients_ids_debug'];
+    unknownNutrientsTags = json.containsKey('unknown_nutrients_tags') == true
+        ? json['unknown_nutrients_tags'].cast<String>()
+        : null;
+    ingredientsIdsDebug = json.containsKey('ingredients_ids_debug') == true
+        ? json['ingredients_ids_debug'].cast<String>()
+        : null;
     lastModifiedBy = json['last_modified_by'];
-    categoriesHierarchy = json['categories_hierarchy'];
+    categoriesHierarchy = json.containsKey('categories_hierarchy') == true
+        ? json['categories_hierarchy'].cast<String>()
+        : null;
     fruitsVegetablesNuts100gEstimate =
-    json['fruits-vegetables-nuts_100g_estimate'];
+        json['fruits-vegetables-nuts_100g_estimate'];
     interfaceVersionModified = json['interface_version_modified'];
     nutritionGrades = json['nutrition_grades'];
     nutritionGradeFr = json['nutrition_grade_fr'];
-    purchasePlacesTags = json['purchase_places_tags'];
+    purchasePlacesTags = json.containsKey('purchase_places_tags') == true
+        ? json['purchase_places_tags'].cast<String>()
+        : null;
     rev = json['rev'];
     ingredientsThatMayBeFromPalmOilTags =
-        json['ingredients_that_may_be_from_palm_oil_tags'];
+        json.containsKey('ingredients_that_may_be_from_palm_oil_tags') == true
+            ? json['ingredients_that_may_be_from_palm_oil_tags'].cast<String>()
+            : null;
     brands = json['brands'];
     imageFrontThumbUrl = json['image_front_thumb_url'];
-    countriesTags = json['countries_tags'];
+    countriesTags = json.containsKey('countries_tags') == true
+        ? json['countries_tags'].cast<String>()
+        : null;
     ingredientsTextFr = json['ingredients_text_fr'];
     code = json['code'];
-    debugParamSortedLangs = json['debug_param_sorted_langs'];
+    debugParamSortedLangs = json.containsKey('debug_param_sorted_langs') == true
+        ? json['debug_param_sorted_langs'].cast<String>()
+        : null;
     ingredientsTextWithAllergensFr = json['ingredients_text_with_allergens_fr'];
-    ingredientsTags = json['ingredients_tags'];
-    brandsTags = json['brands_tags'];
+    ingredientsTags = json.containsKey('ingredients_tags') == true
+        ? json['ingredients_tags'].cast<String>()
+        : null;
+    brandsTags = json.containsKey('brands_tags') == true
+        ? json['brands_tags'].cast<String>()
+        : null;
     manufacturingPlaces = json['manufacturing_places'];
     lc = json['lc'];
-    manufacturingPlacesTags = json['manufacturing_places_tags'];
+    manufacturingPlacesTags =
+        json.containsKey('manufacturing_places_tags') == true
+            ? json['manufacturing_places_tags'].cast<String>()
+            : null;
     imageIngredientsUrl = json['image_ingredients_url'];
     productName = json['product_name'];
     additivesPrev = json['additives_prev'];
@@ -437,60 +543,109 @@ class Product {
         ingredients.add(new Ingredients.fromJson(v));
       });
     }
-    nutrientLevelsTags = json['nutrient_levels_tags'];
+    nutrientLevelsTags = json.containsKey('nutrient_levels_tags') == true
+        ? json['nutrient_levels_tags'].cast<String>()
+        : null;
     additivesN = json['additives_n'];
-    embCodesTags = json['emb_codes_tags'];
-    packagingTags = json['packaging_tags'];
-    tracesTags = json['traces_tags'];
+    embCodesTags = json.containsKey('emb_codes_tags') == true
+        ? json['emb_codes_tags'].cast<String>()
+        : null;
+    packagingTags = json.containsKey('packaging_tags') == true
+        ? json['packaging_tags'].cast<String>()
+        : null;
+    tracesTags = json.containsKey('traces_tags') == true
+        ? json['traces_tags'].cast<String>()
+        : null;
     labels = json['labels'];
-    editorsTags = json['editors_tags'];
-    embCodesDebugTags = json['emb_codes_debug_tags'];
+    editorsTags = json.containsKey('editors_tags') == true
+        ? json['editors_tags'].cast<String>()
+        : null;
+    embCodesDebugTags = json.containsKey('emb_codes_debug_tags') == true
+        ? json['emb_codes_debug_tags'].cast<String>()
+        : null;
     productNameFr = json['product_name_fr'];
     categories = json['categories'];
     maxImgid = json['max_imgid'];
     purchasePlaces = json['purchase_places'];
     nutritionDataPer = json['nutrition_data_per'];
-    additivesPrevTags = json['additives_prev_tags'];
+    additivesPrevTags = json.containsKey('additives_prev_tags') == true
+        ? json['additives_prev_tags'].cast<String>()
+        : null;
     complete = json['complete'];
     additivesPrevN = json['additives_prev_n'];
     manufacturingPlacesDebugTags =
-        json['manufacturing_places_debug_tags'];
+        json.containsKey('manufacturing_places_debug_tags') == true
+            ? json['manufacturing_places_debug_tags'].cast<String>()
+            : null;
     additives = json['additives'];
     ingredientsText = json['ingredients_text'];
-    additivesTags = json['additives_tags'];
-    nutritionGradesTags = json['nutrition_grades_tags'];
+    additivesTags = json.containsKey('additives_tags') == true
+        ? json['additives_tags'].cast<String>()
+        : null;
+    nutritionGradesTags = json.containsKey('nutrition_grades_tags') == true
+        ? json['nutrition_grades_tags'].cast<String>()
+        : null;
     nutritionScoreWarningNoFiber = json['nutrition_score_warning_no_fiber'];
-    checkersTags = json['checkers_tags'];
-    labelsNextHierarchy = json['labels_next_hierarchy'];
+    checkersTags = json.containsKey('checkers_tags') == true
+        ? json['checkers_tags'].cast<String>()
+        : null;
+    labelsNextHierarchy = json.containsKey('labels_next_hierarchy') == true
+        ? json['labels_next_hierarchy'].cast<String>()
+        : null;
     traces = json['traces'];
-    ingredientsDebug = json['ingredients_debug'];
+    ingredientsDebug = json.containsKey('ingredients_debug') == true
+        ? json['ingredients_debug'].cast<String>()
+        : null;
     completedT = json['completed_t'];
     ingredientsTextFrDebugTags =
-        json['ingredients_text_fr_debug_tags'];
+        json.containsKey('ingredients_text_fr_debug_tags') == true
+            ? json['ingredients_text_fr_debug_tags'].cast<String>()
+            : null;
     ingredientsFromPalmOilTags =
-        json['ingredients_from_palm_oil_tags'];
+        json.containsKey('ingredients_from_palm_oil_tags') == true
+            ? json['ingredients_from_palm_oil_tags'].cast<String>()
+            : null;
     imageNutritionThumbUrl = json['image_nutrition_thumb_url'];
-    packagingDebugTags = json['packaging_debug_tags'];
-    servingSizeDebugTags = json['serving_size_debug_tags'];
-    categoriesPrevTags = json['categories_prev_tags'];
-    labelsNextTags = json['labels_next_tags'];
+    packagingDebugTags = json.containsKey('packaging_debug_tags') == true
+        ? json['packaging_debug_tags'].cast<String>()
+        : null;
+    servingSizeDebugTags = json.containsKey('serving_size_debug_tags') == true
+        ? json['serving_size_debug_tags'].cast<String>()
+        : null;
+    categoriesPrevTags = json.containsKey('categories_prev_tags') == true
+        ? json['categories_prev_tags'].cast<String>()
+        : null;
+    labelsNextTags = json.containsKey('labels_next_tags') == true
+        ? json['labels_next_tags'].cast<String>()
+        : null;
     creator = json['creator'];
-    langDebugTags = json['lang_debug_tags'];
+    langDebugTags = json.containsKey('lang_debug_tags') == true
+        ? json['lang_debug_tags'].cast<String>()
+        : null;
     languages = json['languages'] != null
         ? new Languages.fromJson(json['languages'])
         : null;
     lastImageT = json['last_image_t'];
-    photographersTags = json['photographers_tags'];
-    linkDebugTags = json['link_debug_tags'];
-    genericNameFrDebugTags = json['generic_name_fr_debug_tags'];
+    photographersTags = json.containsKey('photographers_tags') == true
+        ? json['photographers_tags'].cast<String>()
+        : null;
+    linkDebugTags = json.containsKey('link_debug_tags') == true
+        ? json['link_debug_tags'].cast<String>()
+        : null;
+    genericNameFrDebugTags =
+        json.containsKey('generic_name_fr_debug_tags') == true
+            ? json['generic_name_fr_debug_tags'].cast<String>()
+            : null;
     ingredientsFromOrThatMayBeFromPalmOilN =
-    json['ingredients_from_or_that_may_be_from_palm_oil_n'];
+        json['ingredients_from_or_that_may_be_from_palm_oil_n'];
     ingredientsThatMayBeFromPalmOilN =
-    json['ingredients_that_may_be_from_palm_oil_n'];
+        json['ingredients_that_may_be_from_palm_oil_n'];
     languagesCodes = json['languages_codes'] != null
         ? new LanguagesCodes.fromJson(json['languages_codes'])
         : null;
-    originsDebugTags = json['origins_debug_tags'];
+    originsDebugTags = json.containsKey('origins_debug_tags') == true
+        ? json['origins_debug_tags'].cast<String>()
+        : null;
     imageNutritionUrl = json['image_nutrition_url'];
     id = json['id'];
   }
@@ -678,7 +833,6 @@ class Product {
   String toString() {
     return 'Product{categoriesPrevHierarchy: $categoriesPrevHierarchy, entryDatesTags: $entryDatesTags, servingQuantity: $servingQuantity, sId: $sId, pnnsGroups2: $pnnsGroups2, pnnsGroups2Tags: $pnnsGroups2Tags, languagesTags: $languagesTags, brandsDebugTags: $brandsDebugTags, imageFrontUrl: $imageFrontUrl, stores: $stores, origins: $origins, productNameFrDebugTags: $productNameFrDebugTags, genericNameFr: $genericNameFr, additivesOldN: $additivesOldN, nutritionDataPerDebugTags: $nutritionDataPerDebugTags, expirationDateDebugTags: $expirationDateDebugTags, codesTags: $codesTags, additivesDebugTags: $additivesDebugTags, labelsHierarchy: $labelsHierarchy, citiesTags: $citiesTags, informersTags: $informersTags, imageIngredientsSmallUrl: $imageIngredientsSmallUrl, lKeywords: $lKeywords, pnnsGroups1Tags: $pnnsGroups1Tags, nutritionScoreDebug: $nutritionScoreDebug, images: $images, ingredientsTextDebug: $ingredientsTextDebug, lastEditor: $lastEditor, allergensHierarchy: $allergensHierarchy, categoriesDebugTags: $categoriesDebugTags, countries: $countries, imageFrontSmallUrl: $imageFrontSmallUrl, storesDebugTags: $storesDebugTags, nutriments: $nutriments, countriesHierarchy: $countriesHierarchy, lang: $lang, languagesHierarchy: $languagesHierarchy, expirationDate: $expirationDate, lastModifiedT: $lastModifiedT, genericName: $genericName, nutrientLevels: $nutrientLevels, originsTags: $originsTags, noNutritionData: $noNutritionData, ingredientsFromPalmOilN: $ingredientsFromPalmOilN, createdT: $createdT, labelsDebugTags: $labelsDebugTags, lastImageDatesTags: $lastImageDatesTags, ingredientsN: $ingredientsN, sortkey: $sortkey, categoriesTags: $categoriesTags, countriesDebugTags: $countriesDebugTags, ingredientsTextWithAllergens: $ingredientsTextWithAllergens, pnnsGroups1: $pnnsGroups1, quantityDebugTags: $quantityDebugTags, embCodes: $embCodes, packaging: $packaging, embCodesOrig: $embCodesOrig, imageNutritionSmallUrl: $imageNutritionSmallUrl, correctorsTags: $correctorsTags, tracesHierarchy: $tracesHierarchy, storesTags: $storesTags, lastEditDatesTags: $lastEditDatesTags, labelsPrevTags: $labelsPrevTags, statesTags: $statesTags, imageSmallUrl: $imageSmallUrl, quantity: $quantity, additivesOldTags: $additivesOldTags, imageIngredientsThumbUrl: $imageIngredientsThumbUrl, ingredientsNTags: $ingredientsNTags, tracesDebugTags: $tracesDebugTags, statesHierarchy: $statesHierarchy, labelsTags: $labelsTags, purchasePlacesDebugTags: $purchasePlacesDebugTags, states: $states, imageUrl: $imageUrl, link: $link, allergens: $allergens, labelsPrevHierarchy: $labelsPrevHierarchy, servingSize: $servingSize, interfaceVersionCreated: $interfaceVersionCreated, allergensTags: $allergensTags, imageThumbUrl: $imageThumbUrl, unknownNutrientsTags: $unknownNutrientsTags, ingredientsIdsDebug: $ingredientsIdsDebug, lastModifiedBy: $lastModifiedBy, categoriesHierarchy: $categoriesHierarchy, fruitsVegetablesNuts100gEstimate: $fruitsVegetablesNuts100gEstimate, interfaceVersionModified: $interfaceVersionModified, nutritionGrades: $nutritionGrades, nutritionGradeFr: $nutritionGradeFr, purchasePlacesTags: $purchasePlacesTags, rev: $rev, ingredientsThatMayBeFromPalmOilTags: $ingredientsThatMayBeFromPalmOilTags, brands: $brands, imageFrontThumbUrl: $imageFrontThumbUrl, countriesTags: $countriesTags, ingredientsTextFr: $ingredientsTextFr, code: $code, debugParamSortedLangs: $debugParamSortedLangs, ingredientsTextWithAllergensFr: $ingredientsTextWithAllergensFr, ingredientsTags: $ingredientsTags, brandsTags: $brandsTags, manufacturingPlaces: $manufacturingPlaces, lc: $lc, manufacturingPlacesTags: $manufacturingPlacesTags, imageIngredientsUrl: $imageIngredientsUrl, productName: $productName, additivesPrev: $additivesPrev, ingredients: $ingredients, nutrientLevelsTags: $nutrientLevelsTags, additivesN: $additivesN, embCodesTags: $embCodesTags, packagingTags: $packagingTags, tracesTags: $tracesTags, labels: $labels, editorsTags: $editorsTags, embCodesDebugTags: $embCodesDebugTags, productNameFr: $productNameFr, categories: $categories, maxImgid: $maxImgid, purchasePlaces: $purchasePlaces, nutritionDataPer: $nutritionDataPer, additivesPrevTags: $additivesPrevTags, complete: $complete, additivesPrevN: $additivesPrevN, manufacturingPlacesDebugTags: $manufacturingPlacesDebugTags, additives: $additives, ingredientsText: $ingredientsText, additivesTags: $additivesTags, nutritionGradesTags: $nutritionGradesTags, nutritionScoreWarningNoFiber: $nutritionScoreWarningNoFiber, checkersTags: $checkersTags, labelsNextHierarchy: $labelsNextHierarchy, traces: $traces, ingredientsDebug: $ingredientsDebug, completedT: $completedT, ingredientsTextFrDebugTags: $ingredientsTextFrDebugTags, ingredientsFromPalmOilTags: $ingredientsFromPalmOilTags, imageNutritionThumbUrl: $imageNutritionThumbUrl, packagingDebugTags: $packagingDebugTags, servingSizeDebugTags: $servingSizeDebugTags, categoriesPrevTags: $categoriesPrevTags, labelsNextTags: $labelsNextTags, creator: $creator, langDebugTags: $langDebugTags, languages: $languages, lastImageT: $lastImageT, photographersTags: $photographersTags, linkDebugTags: $linkDebugTags, genericNameFrDebugTags: $genericNameFrDebugTags, ingredientsFromOrThatMayBeFromPalmOilN: $ingredientsFromOrThatMayBeFromPalmOilN, ingredientsThatMayBeFromPalmOilN: $ingredientsThatMayBeFromPalmOilN, languagesCodes: $languagesCodes, originsDebugTags: $originsDebugTags, imageNutritionUrl: $imageNutritionUrl, id: $id}';
   }
-
 }
 
 class Images {
@@ -718,7 +872,6 @@ class Images {
   String toString() {
     return 'Images{frontFr: $frontFr, nutritionFr: $nutritionFr, ingredientsFr: $ingredientsFr}';
   }
-
 }
 
 class FrontFr {
@@ -736,16 +889,16 @@ class FrontFr {
 
   FrontFr(
       {this.y2,
-        this.x1,
-        this.angle,
-        this.imgid,
-        this.whiteMagic,
-        this.x2,
-        this.normalize,
-        this.y1,
-        this.rev,
-        this.geometry,
-        this.sizes});
+      this.x1,
+      this.angle,
+      this.imgid,
+      this.whiteMagic,
+      this.x2,
+      this.normalize,
+      this.y1,
+      this.rev,
+      this.geometry,
+      this.sizes});
 
   FrontFr.fromJson(Map<String, dynamic> json) {
     y2 = json['y2'];
@@ -783,7 +936,6 @@ class FrontFr {
   String toString() {
     return 'FrontFr{y2: $y2, x1: $x1, angle: $angle, imgid: $imgid, whiteMagic: $whiteMagic, x2: $x2, normalize: $normalize, y1: $y1, rev: $rev, geometry: $geometry, sizes: $sizes}';
   }
-
 }
 
 class Sizes {
@@ -807,7 +959,6 @@ class Sizes {
   String toString() {
     return 'Sizes{full: $full}';
   }
-
 }
 
 class Full {
@@ -832,7 +983,6 @@ class Full {
   String toString() {
     return 'Full{h: $h, w: $w}';
   }
-
 }
 
 class NutritionFr {
@@ -850,16 +1000,16 @@ class NutritionFr {
 
   NutritionFr(
       {this.y1,
-        this.normalize,
-        this.x2,
-        this.rev,
-        this.geometry,
-        this.sizes,
-        this.y2,
-        this.x1,
-        this.angle,
-        this.whiteMagic,
-        this.imgid});
+      this.normalize,
+      this.x2,
+      this.rev,
+      this.geometry,
+      this.sizes,
+      this.y2,
+      this.x1,
+      this.angle,
+      this.whiteMagic,
+      this.imgid});
 
   NutritionFr.fromJson(Map<String, dynamic> json) {
     y1 = json['y1'];
@@ -897,7 +1047,6 @@ class NutritionFr {
   String toString() {
     return 'NutritionFr{y1: $y1, normalize: $normalize, x2: $x2, rev: $rev, geometry: $geometry, sizes: $sizes, y2: $y2, x1: $x1, angle: $angle, whiteMagic: $whiteMagic, imgid: $imgid}';
   }
-
 }
 
 class IngredientsFr {
@@ -915,16 +1064,16 @@ class IngredientsFr {
 
   IngredientsFr(
       {this.y2,
-        this.x1,
-        this.angle,
-        this.whiteMagic,
-        this.imgid,
-        this.normalize,
-        this.y1,
-        this.x2,
-        this.rev,
-        this.sizes,
-        this.geometry});
+      this.x1,
+      this.angle,
+      this.whiteMagic,
+      this.imgid,
+      this.normalize,
+      this.y1,
+      this.x2,
+      this.rev,
+      this.sizes,
+      this.geometry});
 
   IngredientsFr.fromJson(Map<String, dynamic> json) {
     y2 = json['y2'];
@@ -962,26 +1111,25 @@ class IngredientsFr {
   String toString() {
     return 'IngredientsFr{y2: $y2, x1: $x1, angle: $angle, whiteMagic: $whiteMagic, imgid: $imgid, normalize: $normalize, y1: $y1, x2: $x2, rev: $rev, sizes: $sizes, geometry: $geometry}';
   }
-
 }
 
 class Nutriments {
-  double sugarsServing;
+  String sugarsServing;
   String carbohydrates;
   double salt100g;
   double fat100g;
-  String carbohydrates100g;
+  double carbohydrates100g;
   String saturatedFatValue;
   String proteinsUnit;
   double salt;
   double sugars100g;
-  double sugars;
+  String sugars;
   String energyServing;
   String fatUnit;
   String energy;
-  String nutritionScoreFr;
+  int nutritionScoreFr;
   String energy100g;
-  String nutritionScoreUk100g;
+  int nutritionScoreUk100g;
   double saltServing;
   String saturatedFatUnit;
   String fatValue;
@@ -989,7 +1137,7 @@ class Nutriments {
   String proteins;
   double proteins100g;
   String carbohydratesServing;
-  double saturatedFat;
+  String saturatedFat;
   String energyUnit;
   String fat;
   String fatServing;
@@ -999,13 +1147,13 @@ class Nutriments {
   String sugarsValue;
   String energyValue;
   double sodium100g;
-  String nutritionScoreUk;
+  int nutritionScoreUk;
   double sodium;
   double saturatedFat100g;
-  String nutritionScoreFr100g;
+  int nutritionScoreFr100g;
   String carbohydratesValue;
   String carbohydratesUnit;
-  double saturatedFatServing;
+  String saturatedFatServing;
   double sodiumServing;
   String proteinsValue;
   String sugarsUnit;
@@ -1013,49 +1161,49 @@ class Nutriments {
 
   Nutriments(
       {this.sugarsServing,
-        this.carbohydrates,
-        this.salt100g,
-        this.fat100g,
-        this.carbohydrates100g,
-        this.saturatedFatValue,
-        this.proteinsUnit,
-        this.salt,
-        this.sugars100g,
-        this.sugars,
-        this.energyServing,
-        this.fatUnit,
-        this.energy,
-        this.nutritionScoreFr,
-        this.energy100g,
-        this.nutritionScoreUk100g,
-        this.saltServing,
-        this.saturatedFatUnit,
-        this.fatValue,
-        this.saltUnit,
-        this.proteins,
-        this.proteins100g,
-        this.carbohydratesServing,
-        this.saturatedFat,
-        this.energyUnit,
-        this.fat,
-        this.fatServing,
-        this.proteinsServing,
-        this.sodiumValue,
-        this.saltValue,
-        this.sugarsValue,
-        this.energyValue,
-        this.sodium100g,
-        this.nutritionScoreUk,
-        this.sodium,
-        this.saturatedFat100g,
-        this.nutritionScoreFr100g,
-        this.carbohydratesValue,
-        this.carbohydratesUnit,
-        this.saturatedFatServing,
-        this.sodiumServing,
-        this.proteinsValue,
-        this.sugarsUnit,
-        this.sodiumUnit});
+      this.carbohydrates,
+      this.salt100g,
+      this.fat100g,
+      this.carbohydrates100g,
+      this.saturatedFatValue,
+      this.proteinsUnit,
+      this.salt,
+      this.sugars100g,
+      this.sugars,
+      this.energyServing,
+      this.fatUnit,
+      this.energy,
+      this.nutritionScoreFr,
+      this.energy100g,
+      this.nutritionScoreUk100g,
+      this.saltServing,
+      this.saturatedFatUnit,
+      this.fatValue,
+      this.saltUnit,
+      this.proteins,
+      this.proteins100g,
+      this.carbohydratesServing,
+      this.saturatedFat,
+      this.energyUnit,
+      this.fat,
+      this.fatServing,
+      this.proteinsServing,
+      this.sodiumValue,
+      this.saltValue,
+      this.sugarsValue,
+      this.energyValue,
+      this.sodium100g,
+      this.nutritionScoreUk,
+      this.sodium,
+      this.saturatedFat100g,
+      this.nutritionScoreFr100g,
+      this.carbohydratesValue,
+      this.carbohydratesUnit,
+      this.saturatedFatServing,
+      this.sodiumServing,
+      this.proteinsValue,
+      this.sugarsUnit,
+      this.sodiumUnit});
 
   Nutriments.fromJson(Map<String, dynamic> json) {
     sugarsServing = json['sugars_serving'];
@@ -1188,7 +1336,6 @@ class NutrientLevels {
   String toString() {
     return 'NutrientLevels{saturatedFat: $saturatedFat, salt: $salt, fat: $fat, sugars: $sugars}';
   }
-
 }
 
 class Ingredients {
@@ -1219,7 +1366,6 @@ class Ingredients {
   String toString() {
     return 'Ingredients{percent: $percent, rank: $rank, id: $id, text: $text}';
   }
-
 }
 
 class Languages {
@@ -1241,8 +1387,6 @@ class Languages {
   String toString() {
     return 'Languages{enFrench: $enFrench}';
   }
-
-
 }
 
 class LanguagesCodes {
@@ -1264,6 +1408,4 @@ class LanguagesCodes {
   String toString() {
     return 'LanguagesCodes{fr: $fr}';
   }
-
-
 }

@@ -4,15 +4,15 @@ import 'package:hfs_flutter_app/models/OpenFoodFacts/Product.dart';
 part 'OFF_model.g.dart';
 
 @JsonSerializable()*/
-class OFFModel {
+class OffObject {
   String statusVerbose;
   Product product;
   int status;
   String code;
 
-  OFFModel({this.statusVerbose, this.product, this.status, this.code});
+  OffObject({this.statusVerbose, this.product, this.status, this.code});
 
-  OFFModel.fromJson(Map<String, dynamic> json) {
+  OffObject.fromJson(Map<String, dynamic> json) {
     statusVerbose = json['status_verbose'];
     product =
     json['product'] != null ? new Product.fromJson(json['product']) : null;
