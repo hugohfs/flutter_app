@@ -6,6 +6,8 @@ import 'package:hfs_flutter_app/models/OpenFoodFacts/OffObject.dart';
 import 'package:hfs_flutter_app/models/OpenFoodFacts/Post.dart';
 import 'package:hfs_flutter_app/services/authentication.dart';
 import 'package:http/http.dart' as http;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart'
+    as font_awesome_flutter;
 
 class OpenFoodFactsPage extends StatefulWidget {
   OpenFoodFactsPage({Key key, this.auth, this.userId, this.onSignedOut})
@@ -20,9 +22,15 @@ class OpenFoodFactsPage extends StatefulWidget {
 }
 
 class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
-  String _textMessage = "default";
+  String _textMessage;
   Future<Post> _post;
   Future<OffObject> _OffObject;
+
+  String _barcode;
+  final _baseUrl = 'https://world.openfoodfacts.org/api/v0/product/';
+  final _baseUrlEnd = '.json';
+  final _formKey = new GlobalKey<FormState>();
+  String _errorMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +47,14 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
         body: new Container(
             padding: EdgeInsets.all(16.0),
             child: new Form(
+              key: _formKey,
               child: new ListView(
                 shrinkWrap: true,
                 children: <Widget>[
                   _showButtonGetFromLocalFile(),
                   _showButtonGetFromAPI(),
+                  _showInputTextBarcodeNumber(),
+                  _showErrorMessage(),
                   _showTextResult(),
                 ],
               ),
@@ -57,6 +68,25 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
     } catch (e) {
       print(e);
     }
+  }
+
+  Widget _showInputTextBarcodeNumber() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0),
+      child: new TextFormField(
+        maxLines: 1,
+        keyboardType: TextInputType.emailAddress,
+        autofocus: false,
+        decoration: new InputDecoration(
+            hintText: 'Barcode',
+            icon: new Icon(
+              font_awesome_flutter.FontAwesomeIcons.barcode,
+              color: Colors.grey,
+            )),
+        validator: (value) => value.isEmpty ? 'Barcode can\'t be empty' : null,
+        onSaved: (value) => _barcode = value,
+      ),
+    );
   }
 
   Widget _showButtonGetFromLocalFile() {
@@ -88,11 +118,45 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
         color: Colors.blue,
         child: Text('Read data JSON API',
             style: new TextStyle(fontSize: 20.0, color: Colors.white)),
-        onPressed: () {
-          _getDataFromAPI(context);
-        },
+        onPressed: _validateAndSubmit,
+        /*() {
+          _getDataFromAPI();
+        },*/
       )),
     );
+  }
+
+  void _validateAndSubmit() async {
+    setState(() {
+      _errorMessage = "";
+      //_isLoading = true;
+    });
+    if (_validateAndSave()) {
+      String barcode = "";
+      try {
+        _getDataFromAPI();
+        /*setState(() {
+        _isLoading = false;
+      });*/
+
+      } catch (e) {
+        print('Error: $e');
+        setState(() {
+          //_isLoading = false;
+          _errorMessage = e.message;
+        });
+      }
+    }
+  }
+
+// Check if form is valid before perform login or signup
+  bool _validateAndSave() {
+    final form = _formKey.currentState;
+    if (form.validate()) {
+      form.save();
+      return true;
+    }
+    return false;
   }
 
   Widget _showTextResult() {
@@ -106,31 +170,42 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
                 return ListView(shrinkWrap: true, children: <Widget>[
                   Padding(
                       padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                      child: new Wrap(
+                      child: Wrap(
+                          alignment: WrapAlignment.center,
                           children: <Widget>[
-                            Text("Generic Name: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text(snapshot.data.product.genericName)
+                            snapshot.data.product.imageFrontSmallUrl != null
+                              ? Image.network(snapshot.data.product.imageFrontSmallUrl)
+                              : Image.asset('assets/not_found.png')
                           ]
                       )
                   ),
                   Padding(
                       padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                      child: new Wrap(
-                          children: <Widget>[
-                            Text("Ingredients text: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text(snapshot.data.product.ingredientsText)
-                          ]
-                      )
-                  ),
+                      child: new Wrap(children: <Widget>[
+                        Text("Generic Name: ",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        Text(snapshot.data.product.productName != null
+                            ? snapshot.data.product.productName
+                            : "No data found")
+                      ])),
                   Padding(
                       padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                      child: new Wrap(
-                          children: <Widget>[
-                            Text("Nutriments: ", style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text(snapshot.data.product.nutriments.toString())
-                          ]
-                      )
-                  )
+                      child: new Wrap(children: <Widget>[
+                        Text("Ingredients text: ",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        Text(snapshot.data.product.ingredientsText != null
+                            ? snapshot.data.product.ingredientsText
+                            : "No data found")
+                      ])),
+                  Padding(
+                      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+                      child: new Wrap(children: <Widget>[
+                        Text("Nutriments: ",
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        Text(snapshot.data.product.nutriments != null
+                            ? snapshot.data.product.nutriments.toString()
+                            : "No data found")
+                      ]))
                 ]);
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
@@ -140,7 +215,7 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
               return CircularProgressIndicator();
             },
           ));
-    } else if (_textMessage.length > 0 && _textMessage != null) {
+    } else if (_textMessage != null && _textMessage.length > 0) {
       return Padding(
           padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
           child: new Text(
@@ -179,16 +254,21 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
     //print(offModel.product.genericNameFr);
 
     setState(() {
-      _textMessage = "genericName: " + model.product.genericName + "\n\n" +
-          "ingredientsText: " + model.product.ingredientsText + "\n\n" +
-          "nutriments: " + model.product.nutriments.toString();
+      _textMessage = "genericName: " +
+          model.product.genericName +
+          "\n\n" +
+          "ingredientsText: " +
+          model.product.ingredientsText +
+          "\n\n" +
+          "nutriments: " +
+          model.product.nutriments.toString();
       //_textMessage = offModel.product.nutriments.toString();
       _post = null;
       _OffObject = null;
     });
   }
 
-  _getDataFromAPI(BuildContext context) {
+  _getDataFromAPI() {
     setState(() {
       _OffObject = _fetchOffObject();
       //_post = _fetchPost();
@@ -210,8 +290,13 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
   }
 
   Future<OffObject> _fetchOffObject() async {
-    final response = await http.get(
-        'https://world.openfoodfacts.org/api/v0/product/737628064502.json');
+    //_barcode = '8412042502381'; // MORDARIZ 330 Ml
+    //_barcode = '8411620001155'; // El Caserio
+    //_barcode = '8413993070103'; // ensaladilla
+    final url = _baseUrl + _barcode + _baseUrlEnd;
+    print(url);
+
+    final response = await http.get(url);
 
     if (response.statusCode == 200) {
       // If server returns an OK response, parse the JSON
@@ -219,6 +304,23 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
     } else {
       // If that response was not OK, throw an error.
       throw Exception('Failed to load post');
+    }
+  }
+
+  Widget _showErrorMessage() {
+    if (_errorMessage != null && _errorMessage.length > 0) {
+      return new Text(
+        _errorMessage,
+        style: TextStyle(
+            fontSize: 13.0,
+            color: Colors.red,
+            height: 1.0,
+            fontWeight: FontWeight.w300),
+      );
+    } else {
+      return new Container(
+        height: 0.0,
+      );
     }
   }
 }
