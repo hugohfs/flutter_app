@@ -1,7 +1,14 @@
+import 'package:hfs_flutter_app/models/OpenFoodFacts/Images.dart';
+import 'package:hfs_flutter_app/models/OpenFoodFacts/Ingredients.dart';
+import 'package:hfs_flutter_app/models/OpenFoodFacts/Languages.dart';
+import 'package:hfs_flutter_app/models/OpenFoodFacts/LanguagesCodes.dart';
+import 'package:hfs_flutter_app/models/OpenFoodFacts/NutrientLevels.dart';
+import 'package:hfs_flutter_app/models/OpenFoodFacts/Nutriments.dart';
+
 class Product {
   List<String> categoriesPrevHierarchy;
   List<String> entryDatesTags;
-  int servingQuantity;
+  String servingQuantity;
   String sId;
   String pnnsGroups2;
   List<String> pnnsGroups2Tags;
@@ -12,7 +19,7 @@ class Product {
   String origins;
   List<String> productNameFrDebugTags;
   String genericNameFr;
-  int additivesOldN;
+  String additivesOldN;
   List<String> nutritionDataPerDebugTags;
   List<String> expirationDateDebugTags;
   List<String> codesTags;
@@ -37,17 +44,17 @@ class Product {
   String lang;
   List<String> languagesHierarchy;
   String expirationDate;
-  int lastModifiedT;
+  String lastModifiedT;
   String genericName;
   NutrientLevels nutrientLevels;
   List<String> originsTags;
   String noNutritionData;
-  int ingredientsFromPalmOilN;
-  int createdT;
+  String ingredientsFromPalmOilN;
+  String createdT;
   List<String> labelsDebugTags;
   List<String> lastImageDatesTags;
   String ingredientsN;
-  int sortkey;
+  String sortkey;
   List<String> categoriesTags;
   List<String> countriesDebugTags;
   String ingredientsTextWithAllergens;
@@ -85,12 +92,12 @@ class Product {
   List<String> ingredientsIdsDebug;
   String lastModifiedBy;
   List<String> categoriesHierarchy;
-  int fruitsVegetablesNuts100gEstimate;
+  String fruitsVegetablesNuts100gEstimate;
   String interfaceVersionModified;
   String nutritionGrades;
   String nutritionGradeFr;
   List<String> purchasePlacesTags;
-  int rev;
+  String rev;
   List<String> ingredientsThatMayBeFromPalmOilTags;
   String brands;
   String imageFrontThumbUrl;
@@ -109,7 +116,7 @@ class Product {
   String additivesPrev;
   List<Ingredients> ingredients;
   List<String> nutrientLevelsTags;
-  int additivesN;
+  String additivesN;
   List<String> embCodesTags;
   List<String> packagingTags;
   List<String> tracesTags;
@@ -122,19 +129,19 @@ class Product {
   String purchasePlaces;
   String nutritionDataPer;
   List<String> additivesPrevTags;
-  int complete;
-  int additivesPrevN;
+  String complete;
+  String additivesPrevN;
   List<String> manufacturingPlacesDebugTags;
   String additives;
   String ingredientsText;
   List<String> additivesTags;
   List<String> nutritionGradesTags;
-  int nutritionScoreWarningNoFiber;
+  String nutritionScoreWarningNoFiber;
   List<String> checkersTags;
   List<String> labelsNextHierarchy;
   String traces;
   List<String> ingredientsDebug;
-  int completedT;
+  String completedT;
   List<String> ingredientsTextFrDebugTags;
   List<String> ingredientsFromPalmOilTags;
   String imageNutritionThumbUrl;
@@ -145,12 +152,12 @@ class Product {
   String creator;
   List<String> langDebugTags;
   Languages languages;
-  int lastImageT;
+  String lastImageT;
   List<String> photographersTags;
   List<String> linkDebugTags;
   List<String> genericNameFrDebugTags;
-  int ingredientsFromOrThatMayBeFromPalmOilN;
-  int ingredientsThatMayBeFromPalmOilN;
+  String ingredientsFromOrThatMayBeFromPalmOilN;
+  String ingredientsThatMayBeFromPalmOilN;
   LanguagesCodes languagesCodes;
   List<String> originsDebugTags;
   String imageNutritionUrl;
@@ -322,7 +329,11 @@ class Product {
     entryDatesTags = json.containsKey('entry_dates_tags') == true
         ? json['entry_dates_tags'].cast<String>()
         : null;
-    servingQuantity = json['serving_quantity'];
+    servingQuantity = json.containsKey('serving_quantity') == true
+        ? json['serving_quantity'] is String
+            ? json['serving_quantity']
+            : json['serving_quantity'].toString()
+        : null;
     sId = json['_id'];
     pnnsGroups2 = json['pnns_groups_2'];
     pnnsGroups2Tags = json.containsKey('pnns_groups_2_tags') == true
@@ -342,7 +353,11 @@ class Product {
             ? json['product_name_fr_debug_tags'].cast<String>()
             : null;
     genericNameFr = json['generic_name_fr'];
-    additivesOldN = json['additives_old_n'];
+    additivesOldN = json.containsKey('additives_old_n') == true
+        ? json['additives_old_n'] is String
+            ? json['additives_old_n']
+            : json['additives_old_n'].toString()
+        : null;
     nutritionDataPerDebugTags =
         json.containsKey('nutrition_data_per_debug_tags') == true
             ? json['nutrition_data_per_debug_tags'].cast<String>()
@@ -400,7 +415,11 @@ class Product {
         ? json['languages_hierarchy'].cast<String>()
         : null;
     expirationDate = json['expiration_date'];
-    lastModifiedT = json['last_modified_t'];
+    lastModifiedT = json.containsKey('last_modified_t') == true
+        ? json['last_modified_t'] is String
+            ? json['last_modified_t']
+            : json['last_modified_t'].toString()
+        : null;
     genericName = json['generic_name'];
     nutrientLevels = json['nutrient_levels'] != null
         ? new NutrientLevels.fromJson(json['nutrient_levels'])
@@ -409,8 +428,17 @@ class Product {
         ? json['origins_tags'].cast<String>()
         : null;
     noNutritionData = json['no_nutrition_data'];
-    ingredientsFromPalmOilN = json['ingredients_from_palm_oil_n'];
-    createdT = json['created_t'];
+    ingredientsFromPalmOilN =
+        json.containsKey('ingredients_from_palm_oil_n') == true
+            ? json['ingredients_from_palm_oil_n'] is String
+                ? json['ingredients_from_palm_oil_n']
+                : json['ingredients_from_palm_oil_n'].toString()
+            : null;
+    createdT = json.containsKey('created_t') == true
+        ? json['created_t'] is String
+            ? json['created_t']
+            : json['created_t'].toString()
+        : null;
     labelsDebugTags = json.containsKey('labels_debug_tags') == true
         ? json['labels_debug_tags'].cast<String>()
         : null;
@@ -418,7 +446,11 @@ class Product {
         ? json['last_image_dates_tags'].cast<String>()
         : null;
     ingredientsN = json['ingredients_n'];
-    sortkey = json['sortkey'];
+    sortkey = json.containsKey('sortkey') == true
+        ? json['sortkey'] is String
+            ? json['sortkey']
+            : json['sortkey'].toString()
+        : null;
     categoriesTags = json.containsKey('categories_tags') == true
         ? json['categories_tags'].cast<String>()
         : null;
@@ -498,14 +530,20 @@ class Product {
         ? json['categories_hierarchy'].cast<String>()
         : null;
     fruitsVegetablesNuts100gEstimate =
-        json['fruits-vegetables-nuts_100g_estimate'];
+        json.containsKey('fruits-vegetables-nuts_100g_estimate') == true
+            ? json['fruits-vegetables-nuts_100g_estimate'] is String
+                ? json['fruits-vegetables-nuts_100g_estimate']
+                : json['fruits-vegetables-nuts_100g_estimate'].toString()
+            : null;
     interfaceVersionModified = json['interface_version_modified'];
     nutritionGrades = json['nutrition_grades'];
     nutritionGradeFr = json['nutrition_grade_fr'];
     purchasePlacesTags = json.containsKey('purchase_places_tags') == true
         ? json['purchase_places_tags'].cast<String>()
         : null;
-    rev = json['rev'];
+    rev = json.containsKey('rev') == true
+        ? json['rev'] is String ? json['rev'] : json['rev'].toString()
+        : null;
     ingredientsThatMayBeFromPalmOilTags =
         json.containsKey('ingredients_that_may_be_from_palm_oil_tags') == true
             ? json['ingredients_that_may_be_from_palm_oil_tags'].cast<String>()
@@ -545,7 +583,11 @@ class Product {
     nutrientLevelsTags = json.containsKey('nutrient_levels_tags') == true
         ? json['nutrient_levels_tags'].cast<String>()
         : null;
-    additivesN = json['additives_n'];
+    additivesN = json.containsKey('additives_n') == true
+        ? json['additives_n'] is String
+            ? json['additives_n']
+            : json['additives_n'].toString()
+        : null;
     embCodesTags = json.containsKey('emb_codes_tags') == true
         ? json['emb_codes_tags'].cast<String>()
         : null;
@@ -570,8 +612,16 @@ class Product {
     additivesPrevTags = json.containsKey('additives_prev_tags') == true
         ? json['additives_prev_tags'].cast<String>()
         : null;
-    complete = json['complete'];
-    additivesPrevN = json['additives_prev_n'];
+    complete = json.containsKey('complete') == true
+        ? json['complete'] is String
+            ? json['complete']
+            : json['complete'].toString()
+        : null;
+    additivesPrevN = json.containsKey('additives_prev_n') == true
+        ? json['additives_prev_n'] is String
+            ? json['additives_prev_n']
+            : json['additives_prev_n'].toString()
+        : null;
     manufacturingPlacesDebugTags =
         json.containsKey('manufacturing_places_debug_tags') == true
             ? json['manufacturing_places_debug_tags'].cast<String>()
@@ -584,7 +634,12 @@ class Product {
     nutritionGradesTags = json.containsKey('nutrition_grades_tags') == true
         ? json['nutrition_grades_tags'].cast<String>()
         : null;
-    nutritionScoreWarningNoFiber = json['nutrition_score_warning_no_fiber'];
+    nutritionScoreWarningNoFiber =
+        json.containsKey('nutrition_score_warning_no_fiber') == true
+            ? json['nutrition_score_warning_no_fiber'] is String
+                ? json['nutrition_score_warning_no_fiber']
+                : json['nutrition_score_warning_no_fiber'].toString()
+            : null;
     checkersTags = json.containsKey('checkers_tags') == true
         ? json['checkers_tags'].cast<String>()
         : null;
@@ -595,7 +650,11 @@ class Product {
     ingredientsDebug = json.containsKey('ingredients_debug') == true
         ? json['ingredients_debug'].cast<String>()
         : null;
-    completedT = json['completed_t'];
+    completedT = json.containsKey('completed_t') == true
+        ? json['completed_t'] is String
+            ? json['completed_t']
+            : json['completed_t'].toString()
+        : null;
     ingredientsTextFrDebugTags =
         json.containsKey('ingredients_text_fr_debug_tags') == true
             ? json['ingredients_text_fr_debug_tags'].cast<String>()
@@ -624,7 +683,11 @@ class Product {
     languages = json['languages'] != null
         ? new Languages.fromJson(json['languages'])
         : null;
-    lastImageT = json['last_image_t'];
+    lastImageT = json.containsKey('last_image_t') == true
+        ? json['last_image_t'] is String
+            ? json['last_image_t']
+            : json['last_image_t'].toString()
+        : null;
     photographersTags = json.containsKey('photographers_tags') == true
         ? json['photographers_tags'].cast<String>()
         : null;
@@ -635,10 +698,19 @@ class Product {
         json.containsKey('generic_name_fr_debug_tags') == true
             ? json['generic_name_fr_debug_tags'].cast<String>()
             : null;
-    ingredientsFromOrThatMayBeFromPalmOilN =
-        json['ingredients_from_or_that_may_be_from_palm_oil_n'];
+    ingredientsFromOrThatMayBeFromPalmOilN = json.containsKey(
+                'ingredients_from_or_that_may_be_from_palm_oil_n') ==
+            true
+        ? json['ingredients_from_or_that_may_be_from_palm_oil_n'] is String
+            ? json['ingredients_from_or_that_may_be_from_palm_oil_n']
+            : json['ingredients_from_or_that_may_be_from_palm_oil_n'].toString()
+        : null;
     ingredientsThatMayBeFromPalmOilN =
-        json['ingredients_that_may_be_from_palm_oil_n'];
+        json.containsKey('ingredients_that_may_be_from_palm_oil_n') == true
+            ? json['ingredients_that_may_be_from_palm_oil_n'] is String
+                ? json['ingredients_that_may_be_from_palm_oil_n']
+                : json['ingredients_that_may_be_from_palm_oil_n'].toString()
+            : null;
     languagesCodes = json['languages_codes'] != null
         ? new LanguagesCodes.fromJson(json['languages_codes'])
         : null;
@@ -831,745 +903,5 @@ class Product {
   @override
   String toString() {
     return 'Product{categoriesPrevHierarchy: $categoriesPrevHierarchy, entryDatesTags: $entryDatesTags, servingQuantity: $servingQuantity, sId: $sId, pnnsGroups2: $pnnsGroups2, pnnsGroups2Tags: $pnnsGroups2Tags, languagesTags: $languagesTags, brandsDebugTags: $brandsDebugTags, imageFrontUrl: $imageFrontUrl, stores: $stores, origins: $origins, productNameFrDebugTags: $productNameFrDebugTags, genericNameFr: $genericNameFr, additivesOldN: $additivesOldN, nutritionDataPerDebugTags: $nutritionDataPerDebugTags, expirationDateDebugTags: $expirationDateDebugTags, codesTags: $codesTags, additivesDebugTags: $additivesDebugTags, labelsHierarchy: $labelsHierarchy, citiesTags: $citiesTags, informersTags: $informersTags, imageIngredientsSmallUrl: $imageIngredientsSmallUrl, lKeywords: $lKeywords, pnnsGroups1Tags: $pnnsGroups1Tags, nutritionScoreDebug: $nutritionScoreDebug, images: $images, ingredientsTextDebug: $ingredientsTextDebug, lastEditor: $lastEditor, allergensHierarchy: $allergensHierarchy, categoriesDebugTags: $categoriesDebugTags, countries: $countries, imageFrontSmallUrl: $imageFrontSmallUrl, storesDebugTags: $storesDebugTags, nutriments: $nutriments, countriesHierarchy: $countriesHierarchy, lang: $lang, languagesHierarchy: $languagesHierarchy, expirationDate: $expirationDate, lastModifiedT: $lastModifiedT, genericName: $genericName, nutrientLevels: $nutrientLevels, originsTags: $originsTags, noNutritionData: $noNutritionData, ingredientsFromPalmOilN: $ingredientsFromPalmOilN, createdT: $createdT, labelsDebugTags: $labelsDebugTags, lastImageDatesTags: $lastImageDatesTags, ingredientsN: $ingredientsN, sortkey: $sortkey, categoriesTags: $categoriesTags, countriesDebugTags: $countriesDebugTags, ingredientsTextWithAllergens: $ingredientsTextWithAllergens, pnnsGroups1: $pnnsGroups1, quantityDebugTags: $quantityDebugTags, embCodes: $embCodes, packaging: $packaging, embCodesOrig: $embCodesOrig, imageNutritionSmallUrl: $imageNutritionSmallUrl, correctorsTags: $correctorsTags, tracesHierarchy: $tracesHierarchy, storesTags: $storesTags, lastEditDatesTags: $lastEditDatesTags, labelsPrevTags: $labelsPrevTags, statesTags: $statesTags, imageSmallUrl: $imageSmallUrl, quantity: $quantity, additivesOldTags: $additivesOldTags, imageIngredientsThumbUrl: $imageIngredientsThumbUrl, ingredientsNTags: $ingredientsNTags, tracesDebugTags: $tracesDebugTags, statesHierarchy: $statesHierarchy, labelsTags: $labelsTags, purchasePlacesDebugTags: $purchasePlacesDebugTags, states: $states, imageUrl: $imageUrl, link: $link, allergens: $allergens, labelsPrevHierarchy: $labelsPrevHierarchy, servingSize: $servingSize, interfaceVersionCreated: $interfaceVersionCreated, allergensTags: $allergensTags, imageThumbUrl: $imageThumbUrl, unknownNutrientsTags: $unknownNutrientsTags, ingredientsIdsDebug: $ingredientsIdsDebug, lastModifiedBy: $lastModifiedBy, categoriesHierarchy: $categoriesHierarchy, fruitsVegetablesNuts100gEstimate: $fruitsVegetablesNuts100gEstimate, interfaceVersionModified: $interfaceVersionModified, nutritionGrades: $nutritionGrades, nutritionGradeFr: $nutritionGradeFr, purchasePlacesTags: $purchasePlacesTags, rev: $rev, ingredientsThatMayBeFromPalmOilTags: $ingredientsThatMayBeFromPalmOilTags, brands: $brands, imageFrontThumbUrl: $imageFrontThumbUrl, countriesTags: $countriesTags, ingredientsTextFr: $ingredientsTextFr, code: $code, debugParamSortedLangs: $debugParamSortedLangs, ingredientsTextWithAllergensFr: $ingredientsTextWithAllergensFr, ingredientsTags: $ingredientsTags, brandsTags: $brandsTags, manufacturingPlaces: $manufacturingPlaces, lc: $lc, manufacturingPlacesTags: $manufacturingPlacesTags, imageIngredientsUrl: $imageIngredientsUrl, productName: $productName, additivesPrev: $additivesPrev, ingredients: $ingredients, nutrientLevelsTags: $nutrientLevelsTags, additivesN: $additivesN, embCodesTags: $embCodesTags, packagingTags: $packagingTags, tracesTags: $tracesTags, labels: $labels, editorsTags: $editorsTags, embCodesDebugTags: $embCodesDebugTags, productNameFr: $productNameFr, categories: $categories, maxImgid: $maxImgid, purchasePlaces: $purchasePlaces, nutritionDataPer: $nutritionDataPer, additivesPrevTags: $additivesPrevTags, complete: $complete, additivesPrevN: $additivesPrevN, manufacturingPlacesDebugTags: $manufacturingPlacesDebugTags, additives: $additives, ingredientsText: $ingredientsText, additivesTags: $additivesTags, nutritionGradesTags: $nutritionGradesTags, nutritionScoreWarningNoFiber: $nutritionScoreWarningNoFiber, checkersTags: $checkersTags, labelsNextHierarchy: $labelsNextHierarchy, traces: $traces, ingredientsDebug: $ingredientsDebug, completedT: $completedT, ingredientsTextFrDebugTags: $ingredientsTextFrDebugTags, ingredientsFromPalmOilTags: $ingredientsFromPalmOilTags, imageNutritionThumbUrl: $imageNutritionThumbUrl, packagingDebugTags: $packagingDebugTags, servingSizeDebugTags: $servingSizeDebugTags, categoriesPrevTags: $categoriesPrevTags, labelsNextTags: $labelsNextTags, creator: $creator, langDebugTags: $langDebugTags, languages: $languages, lastImageT: $lastImageT, photographersTags: $photographersTags, linkDebugTags: $linkDebugTags, genericNameFrDebugTags: $genericNameFrDebugTags, ingredientsFromOrThatMayBeFromPalmOilN: $ingredientsFromOrThatMayBeFromPalmOilN, ingredientsThatMayBeFromPalmOilN: $ingredientsThatMayBeFromPalmOilN, languagesCodes: $languagesCodes, originsDebugTags: $originsDebugTags, imageNutritionUrl: $imageNutritionUrl, id: $id}';
-  }
-}
-
-class Images {
-  FrontFr frontFr;
-  NutritionFr nutritionFr;
-  IngredientsFr ingredientsFr;
-
-  Images({this.frontFr, this.nutritionFr, this.ingredientsFr});
-
-  Images.fromJson(Map<String, dynamic> json) {
-    frontFr = json['front_fr'] != null
-        ? new FrontFr.fromJson(json['front_fr'])
-        : null;
-    nutritionFr = json['nutrition_fr'] != null
-        ? new NutritionFr.fromJson(json['nutrition_fr'])
-        : null;
-    ingredientsFr = json['ingredients_fr'] != null
-        ? new IngredientsFr.fromJson(json['ingredients_fr'])
-        : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.frontFr != null) {
-      data['front_fr'] = this.frontFr.toJson();
-    }
-    if (this.nutritionFr != null) {
-      data['nutrition_fr'] = this.nutritionFr.toJson();
-    }
-    if (this.ingredientsFr != null) {
-      data['ingredients_fr'] = this.ingredientsFr.toJson();
-    }
-    return data;
-  }
-
-  @override
-  String toString() {
-    return 'Images{frontFr: $frontFr, nutritionFr: $nutritionFr, ingredientsFr: $ingredientsFr}';
-  }
-}
-
-class FrontFr {
-  String y2;
-  String x1;
-  String angle;
-  String imgid;
-  String whiteMagic;
-  String x2;
-  String normalize;
-  String y1;
-  String rev;
-  String geometry;
-  Sizes sizes;
-
-  FrontFr(
-      {this.y2,
-      this.x1,
-      this.angle,
-      this.imgid,
-      this.whiteMagic,
-      this.x2,
-      this.normalize,
-      this.y1,
-      this.rev,
-      this.geometry,
-      this.sizes});
-
-  FrontFr.fromJson(Map<String, dynamic> json) {
-    y2 = json['y2'];
-    x1 = json['x1'];
-    angle = json['angle'];
-    imgid = json['imgid'];
-    whiteMagic = json['white_magic'];
-    x2 = json['x2'];
-    normalize = json['normalize'];
-    y1 = json['y1'];
-    rev = json['rev'];
-    geometry = json['geometry'];
-    sizes = json['sizes'] != null ? new Sizes.fromJson(json['sizes']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['y2'] = this.y2;
-    data['x1'] = this.x1;
-    data['angle'] = this.angle;
-    data['imgid'] = this.imgid;
-    data['white_magic'] = this.whiteMagic;
-    data['x2'] = this.x2;
-    data['normalize'] = this.normalize;
-    data['y1'] = this.y1;
-    data['rev'] = this.rev;
-    data['geometry'] = this.geometry;
-    if (this.sizes != null) {
-      data['sizes'] = this.sizes.toJson();
-    }
-    return data;
-  }
-
-  @override
-  String toString() {
-    return 'FrontFr{y2: $y2, x1: $x1, angle: $angle, imgid: $imgid, whiteMagic: $whiteMagic, x2: $x2, normalize: $normalize, y1: $y1, rev: $rev, geometry: $geometry, sizes: $sizes}';
-  }
-}
-
-class Sizes {
-  Full full;
-
-  Sizes({this.full});
-
-  Sizes.fromJson(Map<String, dynamic> json) {
-    full = json['full'] != null ? new Full.fromJson(json['full']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.full != null) {
-      data['full'] = this.full.toJson();
-    }
-    return data;
-  }
-
-  @override
-  String toString() {
-    return 'Sizes{full: $full}';
-  }
-}
-
-class Full {
-  int h;
-  int w;
-
-  Full({this.h, this.w});
-
-  Full.fromJson(Map<String, dynamic> json) {
-    h = json['h'];
-    w = json['w'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['h'] = this.h;
-    data['w'] = this.w;
-    return data;
-  }
-
-  @override
-  String toString() {
-    return 'Full{h: $h, w: $w}';
-  }
-}
-
-class NutritionFr {
-  String y1;
-  String normalize;
-  String x2;
-  String rev;
-  String geometry;
-  Sizes sizes;
-  String y2;
-  String x1;
-  String angle;
-  String whiteMagic;
-  String imgid;
-
-  NutritionFr(
-      {this.y1,
-      this.normalize,
-      this.x2,
-      this.rev,
-      this.geometry,
-      this.sizes,
-      this.y2,
-      this.x1,
-      this.angle,
-      this.whiteMagic,
-      this.imgid});
-
-  NutritionFr.fromJson(Map<String, dynamic> json) {
-    y1 = json['y1'];
-    normalize = json['normalize'];
-    x2 = json['x2'];
-    rev = json['rev'];
-    geometry = json['geometry'];
-    sizes = json['sizes'] != null ? new Sizes.fromJson(json['sizes']) : null;
-    y2 = json['y2'];
-    x1 = json['x1'];
-    angle = json['angle'];
-    whiteMagic = json['white_magic'];
-    imgid = json['imgid'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['y1'] = this.y1;
-    data['normalize'] = this.normalize;
-    data['x2'] = this.x2;
-    data['rev'] = this.rev;
-    data['geometry'] = this.geometry;
-    if (this.sizes != null) {
-      data['sizes'] = this.sizes.toJson();
-    }
-    data['y2'] = this.y2;
-    data['x1'] = this.x1;
-    data['angle'] = this.angle;
-    data['white_magic'] = this.whiteMagic;
-    data['imgid'] = this.imgid;
-    return data;
-  }
-
-  @override
-  String toString() {
-    return 'NutritionFr{y1: $y1, normalize: $normalize, x2: $x2, rev: $rev, geometry: $geometry, sizes: $sizes, y2: $y2, x1: $x1, angle: $angle, whiteMagic: $whiteMagic, imgid: $imgid}';
-  }
-}
-
-class IngredientsFr {
-  String y2;
-  String x1;
-  String angle;
-  String whiteMagic;
-  String imgid;
-  String normalize;
-  String y1;
-  String x2;
-  String rev;
-  Sizes sizes;
-  String geometry;
-
-  IngredientsFr(
-      {this.y2,
-      this.x1,
-      this.angle,
-      this.whiteMagic,
-      this.imgid,
-      this.normalize,
-      this.y1,
-      this.x2,
-      this.rev,
-      this.sizes,
-      this.geometry});
-
-  IngredientsFr.fromJson(Map<String, dynamic> json) {
-    y2 = json['y2'];
-    x1 = json['x1'];
-    angle = json['angle'];
-    whiteMagic = json['white_magic'];
-    imgid = json['imgid'];
-    normalize = json['normalize'];
-    y1 = json['y1'];
-    x2 = json['x2'];
-    rev = json['rev'];
-    sizes = json['sizes'] != null ? new Sizes.fromJson(json['sizes']) : null;
-    geometry = json['geometry'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['y2'] = this.y2;
-    data['x1'] = this.x1;
-    data['angle'] = this.angle;
-    data['white_magic'] = this.whiteMagic;
-    data['imgid'] = this.imgid;
-    data['normalize'] = this.normalize;
-    data['y1'] = this.y1;
-    data['x2'] = this.x2;
-    data['rev'] = this.rev;
-    if (this.sizes != null) {
-      data['sizes'] = this.sizes.toJson();
-    }
-    data['geometry'] = this.geometry;
-    return data;
-  }
-
-  @override
-  String toString() {
-    return 'IngredientsFr{y2: $y2, x1: $x1, angle: $angle, whiteMagic: $whiteMagic, imgid: $imgid, normalize: $normalize, y1: $y1, x2: $x2, rev: $rev, sizes: $sizes, geometry: $geometry}';
-  }
-}
-
-class Nutriments {
-  String sugarsServing;
-  String carbohydrates;
-  String salt100g;
-  String fat100g;
-  String carbohydrates100g;
-  String saturatedFatValue;
-  String proteinsUnit;
-  String salt;
-  String sugars100g;
-  String sugars;
-  String energyServing;
-  String fatUnit;
-  String energy;
-  String nutritionScoreFr;
-  String energy100g;
-  String nutritionScoreUk100g;
-  String saltServing;
-  String saturatedFatUnit;
-  String fatValue;
-  String saltUnit;
-  String proteins;
-  String proteins100g;
-  String carbohydratesServing;
-  String saturatedFat;
-  String energyUnit;
-  String fat;
-  String fatServing;
-  String proteinsServing;
-  String sodiumValue;
-  String saltValue;
-  String sugarsValue;
-  String energyValue;
-  String sodium100g;
-  String nutritionScoreUk;
-  String sodium;
-  String saturatedFat100g;
-  String nutritionScoreFr100g;
-  String carbohydratesValue;
-  String carbohydratesUnit;
-  String saturatedFatServing;
-  String sodiumServing;
-  String proteinsValue;
-  String sugarsUnit;
-  String sodiumUnit;
-
-  Nutriments(
-      {this.sugarsServing,
-      this.carbohydrates,
-      this.salt100g,
-      this.fat100g,
-      this.carbohydrates100g,
-      this.saturatedFatValue,
-      this.proteinsUnit,
-      this.salt,
-      this.sugars100g,
-      this.sugars,
-      this.energyServing,
-      this.fatUnit,
-      this.energy,
-      this.nutritionScoreFr,
-      this.energy100g,
-      this.nutritionScoreUk100g,
-      this.saltServing,
-      this.saturatedFatUnit,
-      this.fatValue,
-      this.saltUnit,
-      this.proteins,
-      this.proteins100g,
-      this.carbohydratesServing,
-      this.saturatedFat,
-      this.energyUnit,
-      this.fat,
-      this.fatServing,
-      this.proteinsServing,
-      this.sodiumValue,
-      this.saltValue,
-      this.sugarsValue,
-      this.energyValue,
-      this.sodium100g,
-      this.nutritionScoreUk,
-      this.sodium,
-      this.saturatedFat100g,
-      this.nutritionScoreFr100g,
-      this.carbohydratesValue,
-      this.carbohydratesUnit,
-      this.saturatedFatServing,
-      this.sodiumServing,
-      this.proteinsValue,
-      this.sugarsUnit,
-      this.sodiumUnit});
-
-  Nutriments.fromJson(Map<String, dynamic> json) {
-    sugarsServing = json.containsKey('sugars_serving') == true
-        ? json['sugars_serving'] is String
-            ? json['sugars_serving']
-            : json['sugars_serving'].toString()
-        : null;
-    carbohydrates = json.containsKey('carbohydrates') == true
-        ? json['carbohydrates'] is String
-            ? json['carbohydrates']
-            : json['carbohydrates'].toString()
-        : null;
-    salt100g = json.containsKey('salt_100g') == true
-        ? json['salt_100g'] is String
-            ? json['salt_100g']
-            : json['salt_100g'].toString()
-        : null;
-    fat100g = json.containsKey('fat_100g') == true
-        ? json['fat_100g'] is String
-            ? json['fat_100g']
-            : json['fat_100g'].toString()
-        : null;
-    carbohydrates100g = json.containsKey('carbohydrates_100g') == true
-        ? json['carbohydrates_100g'] is String
-            ? json['carbohydrates_100g']
-            : json['carbohydrates_100g'].toString()
-        : null;
-    saturatedFatValue = json.containsKey('saturated-fat_value') == true
-        ? json['saturated-fat_value'] is String
-            ? json['saturated-fat_value']
-            : json['saturated-fat_value'].toString()
-        : null;
-    proteinsUnit = json.containsKey('proteins_unit') == true
-        ? json['proteins_unit'] is String
-            ? json['proteins_unit']
-            : json['proteins_unit'].toString()
-        : null;
-    salt = json.containsKey('salt') == true
-        ? json['salt'] is String ? json['salt'] : json['salt'].toString()
-        : null;
-    sugars100g = json.containsKey('sugars_100g') == true
-        ? json['sugars_100g'] is String
-            ? json['sugars_100g']
-            : json['sugars_100g'].toString()
-        : null;
-    sugars = json.containsKey('sugars') == true
-        ? json['sugars'] is String ? json['sugars'] : json['sugars'].toString()
-        : null;
-    energyServing = json.containsKey('energy_serving') == true
-        ? json['energy_serving'] is String
-            ? json['energy_serving']
-            : json['energy_serving'].toString()
-        : null;
-    fatUnit = json.containsKey('fat_unit') == true
-        ? json['fat_unit'] is String
-            ? json['fat_unit']
-            : json['fat_unit'].toString()
-        : null;
-    energy = json.containsKey('energy') == true
-        ? json['energy'] is String ? json['energy'] : json['energy'].toString()
-        : null;
-    nutritionScoreFr = json.containsKey('nutrition-score-fr') == true
-        ? json['nutrition-score-fr'] is String
-            ? json['nutrition-score-fr']
-            : json['nutrition-score-fr'].toString()
-        : null;
-    energy100g = json.containsKey('energy_100g') == true
-        ? json['energy_100g'] is String
-            ? json['energy_100g']
-            : json['energy_100g'].toString()
-        : null;
-    nutritionScoreUk100g = json.containsKey('nutrition-score-uk_100g') == true
-        ? json['nutrition-score-uk_100g'] is String
-            ? json['nutrition-score-uk_100g']
-            : json['nutrition-score-uk_100g'].toString()
-        : null;
-    saltServing = json.containsKey('salt_serving') == true
-        ? json['salt_serving'] is String
-            ? json['salt_serving']
-            : json['salt_serving'].toString()
-        : null;
-    saturatedFatUnit = json.containsKey('saturated-fat_unit') == true
-        ? json['saturated-fat_unit'] is String
-            ? json['saturated-fat_unit']
-            : json['saturated-fat_unit'].toString()
-        : null;
-    fatValue = json.containsKey('fat_value') == true
-        ? json['fat_value'] is String
-            ? json['fat_value']
-            : json['fat_value'].toString()
-        : null;
-    saltUnit = json.containsKey('salt_unit') == true
-        ? json['salt_unit'] is String
-            ? json['salt_unit']
-            : json['salt_unit'].toString()
-        : null;
-    proteins = json.containsKey('proteins') == true
-        ? json['proteins'] is String
-            ? json['proteins']
-            : json['proteins'].toString()
-        : null;
-    proteins100g = json.containsKey('proteins_100g') == true
-        ? json['proteins_100g'] is String
-            ? json['proteins_100g']
-            : json['proteins_100g'].toString()
-        : null;
-    carbohydratesServing = json.containsKey('carbohydrates_serving') == true
-        ? json['carbohydrates_serving'] is String
-            ? json['carbohydrates_serving']
-            : json['carbohydrates_serving'].toString()
-        : null;
-    saturatedFat = json.containsKey('saturated-fat') == true
-        ? json['saturated-fat'] is String
-            ? json['saturated-fat']
-            : json['saturated-fat'].toString()
-        : null;
-    energyUnit = json.containsKey('energy_unit') == true
-        ? json['energy_unit'] is String
-            ? json['energy_unit']
-            : json['energy_unit'].toString()
-        : null;
-    fat = json.containsKey('fat') == true
-        ? json['fat'] is String ? json['fat'] : json['fat'].toString()
-        : null;
-    fatServing = json.containsKey('fat_serving') == true
-        ? json['fat_serving'] is String
-            ? json['fat_serving']
-            : json['fat_serving'].toString()
-        : null;
-    proteinsServing = json.containsKey('proteins_serving') == true
-        ? json['proteins_serving'] is String
-            ? json['proteins_serving']
-            : json['proteins_serving'].toString()
-        : null;
-    sodiumValue = json.containsKey('sodium_value') == true
-        ? json['sodium_value'] is String
-            ? json['sodium_value']
-            : json['sodium_value'].toString()
-        : null;
-    saltValue = json.containsKey('salt_value') == true
-        ? json['salt_value'] is String
-            ? json['salt_value']
-            : json['salt_value'].toString()
-        : null;
-    sugarsValue = json.containsKey('sugars_value') == true
-        ? json['sugars_value'] is String
-            ? json['sugars_value']
-            : json['sugars_value'].toString()
-        : null;
-    energyValue = json.containsKey('energy_value') == true
-        ? json['energy_value'] is String
-            ? json['energy_value']
-            : json['energy_value'].toString()
-        : null;
-    sodium100g = json.containsKey('sodium_100g') == true
-        ? json['sodium_100g'] is String
-            ? json['sodium_100g']
-            : json['sodium_100g'].toString()
-        : null;
-    nutritionScoreUk = json.containsKey('nutrition-score-uk') == true
-        ? json['nutrition-score-uk'] is String
-            ? json['nutrition-score-uk']
-            : json['nutrition-score-uk'].toString()
-        : null;
-    sodium = json.containsKey('sodium') == true
-        ? json['sodium'] is String ? json['sodium'] : json['sodium'].toString()
-        : null;
-    saturatedFat100g = json.containsKey('saturated-fat_100g') == true
-        ? json['saturated-fat_100g'] is String
-            ? json['saturated-fat_100g']
-            : json['saturated-fat_100g'].toString()
-        : null;
-    nutritionScoreFr100g = json.containsKey('nutrition-score-fr_100g') == true
-        ? json['nutrition-score-fr_100g'] is String
-            ? json['nutrition-score-fr_100g']
-            : json['nutrition-score-fr_100g'].toString()
-        : null;
-    carbohydratesValue = json.containsKey('carbohydrates_value') == true
-        ? json['carbohydrates_value'] is String
-            ? json['carbohydrates_value']
-            : json['carbohydrates_value'].toString()
-        : null;
-    carbohydratesUnit = json.containsKey('carbohydrates_unit') == true
-        ? json['carbohydrates_unit'] is String
-            ? json['carbohydrates_unit']
-            : json['carbohydrates_unit'].toString()
-        : null;
-    saturatedFatServing = json.containsKey('saturated-fat_serving') == true
-        ? json['saturated-fat_serving'] is String
-            ? json['saturated-fat_serving']
-            : json['saturated-fat_serving'].toString()
-        : null;
-    sodiumServing = json.containsKey('sodium_serving') == true
-        ? json['sodium_serving'] is String
-            ? json['sodium_serving']
-            : json['sodium_serving'].toString()
-        : null;
-    proteinsValue = json.containsKey('proteins_value') == true
-        ? json['proteins_value'] is String
-            ? json['proteins_value']
-            : json['proteins_value'].toString()
-        : null;
-    sugarsUnit = json.containsKey('sugars_unit') == true
-        ? json['sugars_unit'] is String
-            ? json['sugars_unit']
-            : json['sugars_unit'].toString()
-        : null;
-    sodiumUnit = json.containsKey('sodium_unit') == true
-        ? json['sodium_unit'] is String
-            ? json['sodium_unit']
-            : json['sodium_unit'].toString()
-        : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['sugars_serving'] = this.sugarsServing;
-    data['carbohydrates'] = this.carbohydrates;
-    data['salt_100g'] = this.salt100g;
-    data['fat_100g'] = this.fat100g;
-    data['carbohydrates_100g'] = this.carbohydrates100g;
-    data['saturated-fat_value'] = this.saturatedFatValue;
-    data['proteins_unit'] = this.proteinsUnit;
-    data['salt'] = this.salt;
-    data['sugars_100g'] = this.sugars100g;
-    data['sugars'] = this.sugars;
-    data['energy_serving'] = this.energyServing;
-    data['fat_unit'] = this.fatUnit;
-    data['energy'] = this.energy;
-    data['nutrition-score-fr'] = this.nutritionScoreFr;
-    data['energy_100g'] = this.energy100g;
-    data['nutrition-score-uk_100g'] = this.nutritionScoreUk100g;
-    data['salt_serving'] = this.saltServing;
-    data['saturated-fat_unit'] = this.saturatedFatUnit;
-    data['fat_value'] = this.fatValue;
-    data['salt_unit'] = this.saltUnit;
-    data['proteins'] = this.proteins;
-    data['proteins_100g'] = this.proteins100g;
-    data['carbohydrates_serving'] = this.carbohydratesServing;
-    data['saturated-fat'] = this.saturatedFat;
-    data['energy_unit'] = this.energyUnit;
-    data['fat'] = this.fat;
-    data['fat_serving'] = this.fatServing;
-    data['proteins_serving'] = this.proteinsServing;
-    data['sodium_value'] = this.sodiumValue;
-    data['salt_value'] = this.saltValue;
-    data['sugars_value'] = this.sugarsValue;
-    data['energy_value'] = this.energyValue;
-    data['sodium_100g'] = this.sodium100g;
-    data['nutrition-score-uk'] = this.nutritionScoreUk;
-    data['sodium'] = this.sodium;
-    data['saturated-fat_100g'] = this.saturatedFat100g;
-    data['nutrition-score-fr_100g'] = this.nutritionScoreFr100g;
-    data['carbohydrates_value'] = this.carbohydratesValue;
-    data['carbohydrates_unit'] = this.carbohydratesUnit;
-    data['saturated-fat_serving'] = this.saturatedFatServing;
-    data['sodium_serving'] = this.sodiumServing;
-    data['proteins_value'] = this.proteinsValue;
-    data['sugars_unit'] = this.sugarsUnit;
-    data['sodium_unit'] = this.sodiumUnit;
-    return data;
-  }
-
-  @override
-  String toString() {
-    return 'Nutriments{sugarsServing: $sugarsServing, carbohydrates: $carbohydrates, salt100g: $salt100g, fat100g: $fat100g, carbohydrates100g: $carbohydrates100g, saturatedFatValue: $saturatedFatValue, proteinsUnit: $proteinsUnit, salt: $salt, sugars100g: $sugars100g, sugars: $sugars, energyServing: $energyServing, fatUnit: $fatUnit, energy: $energy, nutritionScoreFr: $nutritionScoreFr, energy100g: $energy100g, nutritionScoreUk100g: $nutritionScoreUk100g, saltServing: $saltServing, saturatedFatUnit: $saturatedFatUnit, fatValue: $fatValue, saltUnit: $saltUnit, proteins: $proteins, proteins100g: $proteins100g, carbohydratesServing: $carbohydratesServing, saturatedFat: $saturatedFat, energyUnit: $energyUnit, fat: $fat, fatServing: $fatServing, proteinsServing: $proteinsServing, sodiumValue: $sodiumValue, saltValue: $saltValue, sugarsValue: $sugarsValue, energyValue: $energyValue, sodium100g: $sodium100g, nutritionScoreUk: $nutritionScoreUk, sodium: $sodium, saturatedFat100g: $saturatedFat100g, nutritionScoreFr100g: $nutritionScoreFr100g, carbohydratesValue: $carbohydratesValue, carbohydratesUnit: $carbohydratesUnit, saturatedFatServing: $saturatedFatServing, sodiumServing: $sodiumServing, proteinsValue: $proteinsValue, sugarsUnit: $sugarsUnit, sodiumUnit: $sodiumUnit}';
-  }
-}
-
-class NutrientLevels {
-  String saturatedFat;
-  String salt;
-  String fat;
-  String sugars;
-
-  NutrientLevels({this.saturatedFat, this.salt, this.fat, this.sugars});
-
-  NutrientLevels.fromJson(Map<String, dynamic> json) {
-    saturatedFat = json['saturated-fat'];
-    salt = json['salt'];
-    fat = json['fat'];
-    sugars = json['sugars'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['saturated-fat'] = this.saturatedFat;
-    data['salt'] = this.salt;
-    data['fat'] = this.fat;
-    data['sugars'] = this.sugars;
-    return data;
-  }
-
-  @override
-  String toString() {
-    return 'NutrientLevels{saturatedFat: $saturatedFat, salt: $salt, fat: $fat, sugars: $sugars}';
-  }
-}
-
-class Ingredients {
-  String percent;
-  int rank;
-  String id;
-  String text;
-
-  Ingredients({this.percent, this.rank, this.id, this.text});
-
-  Ingredients.fromJson(Map<String, dynamic> json) {
-    percent = json['percent'];
-    rank = json['rank'];
-    id = json['id'];
-    text = json['text'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['percent'] = this.percent;
-    data['rank'] = this.rank;
-    data['id'] = this.id;
-    data['text'] = this.text;
-    return data;
-  }
-
-  @override
-  String toString() {
-    return 'Ingredients{percent: $percent, rank: $rank, id: $id, text: $text}';
-  }
-}
-
-class Languages {
-  int enFrench;
-
-  Languages({this.enFrench});
-
-  Languages.fromJson(Map<String, dynamic> json) {
-    enFrench = json['en:french'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['en:french'] = this.enFrench;
-    return data;
-  }
-
-  @override
-  String toString() {
-    return 'Languages{enFrench: $enFrench}';
-  }
-}
-
-class LanguagesCodes {
-  int fr;
-
-  LanguagesCodes({this.fr});
-
-  LanguagesCodes.fromJson(Map<String, dynamic> json) {
-    fr = json['fr'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['fr'] = this.fr;
-    return data;
-  }
-
-  @override
-  String toString() {
-    return 'LanguagesCodes{fr: $fr}';
   }
 }

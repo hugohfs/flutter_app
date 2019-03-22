@@ -1,9 +1,5 @@
 import 'package:hfs_flutter_app/models/OpenFoodFacts/Product.dart';
-/*import 'package:json_annotation/json_annotation.dart';
 
-part 'OFF_model.g.dart';
-
-@JsonSerializable()*/
 class OffObject {
   String statusVerbose;
   Product product;
