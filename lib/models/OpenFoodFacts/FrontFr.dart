@@ -29,7 +29,11 @@ class FrontFr {
   FrontFr.fromJson(Map<String, dynamic> json) {
     y2 = json.containsKey('y2') == true ? json['y2'] : null;
     x1 = json.containsKey('x1') == true ? json['x1'] : null;
-    angle = json.containsKey('angle') == true ? json['angle'] : null;
+    angle = json.containsKey('angle') == true
+        ? json['angle'] is String
+        ? json['angle']
+        : json['angle'].toString()
+        : null;
     imgid = json.containsKey('imgid') == true ? json['imgid'] : null;
     whiteMagic = json.containsKey('white_magic') == true ? json['white_magic'] : null;
     x2 = json.containsKey('x2') == true ? json['x2'] : null;

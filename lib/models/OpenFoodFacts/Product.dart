@@ -334,8 +334,12 @@ class Product {
             ? json['serving_quantity']
             : json['serving_quantity'].toString()
         : null;
-    sId = json['_id'];
-    pnnsGroups2 = json['pnns_groups_2'];
+    sId = json.containsKey('_id') == true
+        ? json['_id'].toString()
+        : null;
+    pnnsGroups2 = json.containsKey('pnns_groups_2') == true
+        ? json['pnns_groups_2'].toString()
+        : null;
     pnnsGroups2Tags = json.containsKey('pnns_groups_2_tags') == true
         ? json['pnns_groups_2_tags'].cast<String>()
         : null;
@@ -345,14 +349,22 @@ class Product {
     brandsDebugTags = json.containsKey('brands_debug_tags') == true
         ? json['brands_debug_tags'].cast<String>()
         : null;
-    imageFrontUrl = json['image_front_url'];
-    stores = json['stores'];
-    origins = json['origins'];
+    imageFrontUrl = json.containsKey('image_front_url') == true
+        ? json['image_front_url'].toString()
+        : null;
+    stores = json.containsKey('stores') == true
+        ? json['stores'].toString()
+        : null;
+    origins = json.containsKey('origins') == true
+        ? json['origins'].toString()
+        : null;
     productNameFrDebugTags =
         json.containsKey('product_name_fr_debug_tags') == true
             ? json['product_name_fr_debug_tags'].cast<String>()
             : null;
-    genericNameFr = json['generic_name_fr'];
+    genericNameFr = json.containsKey('generic_name_fr') == true
+        ? json['generic_name_fr'].toString()
+        : null;
     additivesOldN = json.containsKey('additives_old_n') == true
         ? json['additives_old_n'] is String
             ? json['additives_old_n']
@@ -381,26 +393,38 @@ class Product {
     informersTags = json.containsKey('informers_tags') == true
         ? json['informers_tags'].cast<String>()
         : null;
-    imageIngredientsSmallUrl = json['image_ingredients_small_url'];
+    imageIngredientsSmallUrl = json.containsKey('image_ingredients_small_url') == true
+        ? json['image_ingredients_small_url'].toString()
+        : null;
     lKeywords = json.containsKey('_keywords') == true
         ? json['_keywords'].cast<String>()
         : null;
     pnnsGroups1Tags = json.containsKey('pnns_groups_1_tags') == true
         ? json['pnns_groups_1_tags'].cast<String>()
         : null;
-    nutritionScoreDebug = json['nutrition_score_debug'];
+    nutritionScoreDebug = json.containsKey('nutrition_score_debug') == true
+        ? json['nutrition_score_debug'].toString()
+        : null;
     images =
         json['images'] != null ? new Images.fromJson(json['images']) : null;
-    ingredientsTextDebug = json['ingredients_text_debug'];
-    lastEditor = json['last_editor'];
+    ingredientsTextDebug = json.containsKey('ingredients_text_debug') == true
+        ? json['ingredients_text_debug'].toString()
+        : null;
+    lastEditor = json.containsKey('last_editor') == true
+        ? json['last_editor'].toString()
+        : null;
     allergensHierarchy = json.containsKey('allergens_hierarchy') == true
         ? json['allergens_hierarchy'].cast<String>()
         : null;
     categoriesDebugTags = json.containsKey('categories_debug_tags') == true
         ? json['categories_debug_tags'].cast<String>()
         : null;
-    countries = json['countries'];
-    imageFrontSmallUrl = json['image_front_small_url'];
+    countries = json.containsKey('countries') == true
+        ? json['countries'].toString()
+        : null;
+    imageFrontSmallUrl = json.containsKey('image_front_small_url') == true
+        ? json['image_front_small_url'].toString()
+        : null;
     storesDebugTags = json.containsKey('stores_debug_tags') == true
         ? json['stores_debug_tags'].cast<String>()
         : null;
@@ -410,24 +434,32 @@ class Product {
     countriesHierarchy = json.containsKey('countries_hierarchy') == true
         ? json['countries_hierarchy'].cast<String>()
         : null;
-    lang = json['lang'];
+    lang = json.containsKey('lang') == true
+        ? json['lang'].toString()
+        : null;
     languagesHierarchy = json.containsKey('languages_hierarchy') == true
         ? json['languages_hierarchy'].cast<String>()
         : null;
-    expirationDate = json['expiration_date'];
+    expirationDate = json.containsKey('expiration_date') == true
+        ? json['expiration_date'].toString()
+        : null;
     lastModifiedT = json.containsKey('last_modified_t') == true
         ? json['last_modified_t'] is String
             ? json['last_modified_t']
             : json['last_modified_t'].toString()
         : null;
-    genericName = json['generic_name'];
+    genericName = json.containsKey('generic_name') == true
+        ? json['generic_name'].toString()
+        : null;
     nutrientLevels = json['nutrient_levels'] != null
         ? new NutrientLevels.fromJson(json['nutrient_levels'])
         : null;
     originsTags = json.containsKey('origins_tags') == true
         ? json['origins_tags'].cast<String>()
         : null;
-    noNutritionData = json['no_nutrition_data'];
+    noNutritionData = json.containsKey('no_nutrition_data') == true
+        ? json['no_nutrition_data'].toString()
+        : null;
     ingredientsFromPalmOilN =
         json.containsKey('ingredients_from_palm_oil_n') == true
             ? json['ingredients_from_palm_oil_n'] is String
@@ -445,7 +477,9 @@ class Product {
     lastImageDatesTags = json.containsKey('last_image_dates_tags') == true
         ? json['last_image_dates_tags'].cast<String>()
         : null;
-    ingredientsN = json['ingredients_n'];
+    ingredientsN = json.containsKey('ingredients_n') == true
+        ? json['ingredients_n'].toString()
+        : null;
     sortkey = json.containsKey('sortkey') == true
         ? json['sortkey'] is String
             ? json['sortkey']
@@ -457,15 +491,27 @@ class Product {
     countriesDebugTags = json.containsKey('countries_debug_tags') == true
         ? json['countries_debug_tags'].cast<String>()
         : null;
-    ingredientsTextWithAllergens = json['ingredients_text_with_allergens'];
-    pnnsGroups1 = json['pnns_groups_1'];
+    ingredientsTextWithAllergens = json.containsKey('ingredients_text_with_allergens') == true
+        ? json['ingredients_text_with_allergens'].toString()
+        : null;
+    pnnsGroups1 = json.containsKey('pnns_groups_1') == true
+        ? json['pnns_groups_1'].toString()
+        : null;
     quantityDebugTags = json.containsKey('quantity_debug_tags') == true
         ? json['quantity_debug_tags'].cast<String>()
         : null;
-    embCodes = json['emb_codes'];
-    packaging = json['packaging'];
-    embCodesOrig = json['emb_codes_orig'];
-    imageNutritionSmallUrl = json['image_nutrition_small_url'];
+    embCodes = json.containsKey('emb_codes') == true
+        ? json['emb_codes'].toString()
+        : null;
+    packaging = json.containsKey('packaging') == true
+        ? json['packaging'].toString()
+        : null;
+    embCodesOrig = json.containsKey('emb_codes_orig') == true
+        ? json['emb_codes_orig'].toString()
+        : null;
+    imageNutritionSmallUrl = json.containsKey('image_nutrition_small_url') == true
+        ? json['image_nutrition_small_url'].toString()
+        : null;
     correctorsTags = json.containsKey('correctors_tags') == true
         ? json['correctors_tags'].cast<String>()
         : null;
@@ -484,12 +530,18 @@ class Product {
     statesTags = json.containsKey('states_tags') == true
         ? json['states_tags'].cast<String>()
         : null;
-    imageSmallUrl = json['image_small_url'];
-    quantity = json['quantity'];
+    imageSmallUrl = json.containsKey('image_small_url') == true
+        ? json['image_small_url'].toString()
+        : null;
+    quantity = json.containsKey('quantity') == true
+        ? json['quantity'].toString()
+        : null;
     additivesOldTags = json.containsKey('additives_old_tags') == true
         ? json['additives_old_tags'].cast<String>()
         : null;
-    imageIngredientsThumbUrl = json['image_ingredients_thumb_url'];
+    imageIngredientsThumbUrl = json.containsKey('image_ingredients_thumb_url') == true
+        ? json['image_ingredients_thumb_url'].toString()
+        : null;
     ingredientsNTags = json.containsKey('ingredients_n_tags') == true
         ? json['ingredients_n_tags'].cast<String>()
         : null;
@@ -506,26 +558,42 @@ class Product {
         json.containsKey('purchase_places_debug_tags') == true
             ? json['purchase_places_debug_tags'].cast<String>()
             : null;
-    states = json['states'];
-    imageUrl = json['image_url'];
-    link = json['link'];
-    allergens = json['allergens'];
+    states = json.containsKey('states') == true
+        ? json['states'].toString()
+        : null;
+    imageUrl = json.containsKey('image_url') == true
+        ? json['image_url'].toString()
+        : null;
+    link = json.containsKey('link') == true
+        ? json['link'].toString()
+        : null;
+    allergens = json.containsKey('allergens') == true
+        ? json['allergens'].toString()
+        : null;
     labelsPrevHierarchy = json.containsKey('labels_prev_hierarchy') == true
         ? json['labels_prev_hierarchy'].cast<String>()
         : null;
-    servingSize = json['serving_size'];
-    interfaceVersionCreated = json['interface_version_created'];
+    servingSize = json.containsKey('serving_size') == true
+        ? json['serving_size'].toString()
+        : null;
+    interfaceVersionCreated = json.containsKey('interface_version_created') == true
+        ? json['interface_version_created'].toString()
+        : null;
     allergensTags = json.containsKey('allergens_tags') == true
         ? json['allergens_tags'].cast<String>()
         : null;
-    imageThumbUrl = json['image_thumb_url'];
+    imageThumbUrl = json.containsKey('image_thumb_url') == true
+        ? json['image_thumb_url'].toString()
+        : null;
     unknownNutrientsTags = json.containsKey('unknown_nutrients_tags') == true
         ? json['unknown_nutrients_tags'].cast<String>()
         : null;
     ingredientsIdsDebug = json.containsKey('ingredients_ids_debug') == true
         ? json['ingredients_ids_debug'].cast<String>()
         : null;
-    lastModifiedBy = json['last_modified_by'];
+    lastModifiedBy = json.containsKey('last_modified_by') == true
+        ? json['last_modified_by'].toString()
+        : null;
     categoriesHierarchy = json.containsKey('categories_hierarchy') == true
         ? json['categories_hierarchy'].cast<String>()
         : null;
@@ -535,9 +603,15 @@ class Product {
                 ? json['fruits-vegetables-nuts_100g_estimate']
                 : json['fruits-vegetables-nuts_100g_estimate'].toString()
             : null;
-    interfaceVersionModified = json['interface_version_modified'];
-    nutritionGrades = json['nutrition_grades'];
-    nutritionGradeFr = json['nutrition_grade_fr'];
+    interfaceVersionModified = json.containsKey('interface_version_modified') == true
+        ? json['interface_version_modified'].toString()
+        : null;
+    nutritionGrades = json.containsKey('nutrition_grades') == true
+        ? json['nutrition_grades'].toString()
+        : null;
+    nutritionGradeFr = json.containsKey('nutrition_grade_fr') == true
+        ? json['nutrition_grade_fr'].toString()
+        : null;
     purchasePlacesTags = json.containsKey('purchase_places_tags') == true
         ? json['purchase_places_tags'].cast<String>()
         : null;
@@ -548,32 +622,52 @@ class Product {
         json.containsKey('ingredients_that_may_be_from_palm_oil_tags') == true
             ? json['ingredients_that_may_be_from_palm_oil_tags'].cast<String>()
             : null;
-    brands = json['brands'];
-    imageFrontThumbUrl = json['image_front_thumb_url'];
+    brands = json.containsKey('brands') == true
+        ? json['brands'].toString()
+        : null;
+    imageFrontThumbUrl = json.containsKey('image_front_thumb_url') == true
+        ? json['image_front_thumb_url'].toString()
+        : null;
     countriesTags = json.containsKey('countries_tags') == true
         ? json['countries_tags'].cast<String>()
         : null;
-    ingredientsTextFr = json['ingredients_text_fr'];
-    code = json['code'];
+    ingredientsTextFr = json.containsKey('ingredients_text_fr') == true
+        ? json['ingredients_text_fr'].toString()
+        : null;
+    code = json.containsKey('code') == true
+        ? json['code'].toString()
+        : null;
     debugParamSortedLangs = json.containsKey('debug_param_sorted_langs') == true
         ? json['debug_param_sorted_langs'].cast<String>()
         : null;
-    ingredientsTextWithAllergensFr = json['ingredients_text_with_allergens_fr'];
+    ingredientsTextWithAllergensFr = json.containsKey('ingredients_text_with_allergens_fr') == true
+        ? json['ingredients_text_with_allergens_fr'].toString()
+        : null;
     ingredientsTags = json.containsKey('ingredients_tags') == true
         ? json['ingredients_tags'].cast<String>()
         : null;
     brandsTags = json.containsKey('brands_tags') == true
         ? json['brands_tags'].cast<String>()
         : null;
-    manufacturingPlaces = json['manufacturing_places'];
-    lc = json['lc'];
+    manufacturingPlaces = json.containsKey('manufacturing_places') == true
+        ? json['manufacturing_places'].toString()
+        : null;
+    lc = json.containsKey('lc') == true
+        ? json['lc'].toString()
+        : null;
     manufacturingPlacesTags =
         json.containsKey('manufacturing_places_tags') == true
             ? json['manufacturing_places_tags'].cast<String>()
             : null;
-    imageIngredientsUrl = json['image_ingredients_url'];
-    productName = json['product_name'];
-    additivesPrev = json['additives_prev'];
+    imageIngredientsUrl = json.containsKey('image_ingredients_url') == true
+        ? json['image_ingredients_url'].toString()
+        : null;
+    productName = json.containsKey('product_name') == true
+        ? json['product_name'].toString()
+        : null;
+    additivesPrev = json.containsKey('additives_prev') == true
+        ? json['additives_prev'].toString()
+        : null;
     if (json['ingredients'] != null) {
       ingredients = new List<Ingredients>();
       json['ingredients'].forEach((v) {
@@ -597,18 +691,30 @@ class Product {
     tracesTags = json.containsKey('traces_tags') == true
         ? json['traces_tags'].cast<String>()
         : null;
-    labels = json['labels'];
+    labels = json.containsKey('labels') == true
+        ? json['labels'].toString()
+        : null;
     editorsTags = json.containsKey('editors_tags') == true
         ? json['editors_tags'].cast<String>()
         : null;
     embCodesDebugTags = json.containsKey('emb_codes_debug_tags') == true
         ? json['emb_codes_debug_tags'].cast<String>()
         : null;
-    productNameFr = json['product_name_fr'];
-    categories = json['categories'];
-    maxImgid = json['max_imgid'];
-    purchasePlaces = json['purchase_places'];
-    nutritionDataPer = json['nutrition_data_per'];
+    productNameFr = json.containsKey('product_name_fr') == true
+        ? json['product_name_fr'].toString()
+        : null;
+    categories = json.containsKey('categories') == true
+        ? json['categories'].toString()
+        : null;
+    maxImgid = json.containsKey('max_imgid') == true
+        ? json['max_imgid'].toString()
+        : null;
+    purchasePlaces = json.containsKey('purchase_places') == true
+        ? json['purchase_places'].toString()
+        : null;
+    nutritionDataPer = json.containsKey('nutrition_data_per') == true
+        ? json['nutrition_data_per'].toString()
+        : null;
     additivesPrevTags = json.containsKey('additives_prev_tags') == true
         ? json['additives_prev_tags'].cast<String>()
         : null;
@@ -626,8 +732,12 @@ class Product {
         json.containsKey('manufacturing_places_debug_tags') == true
             ? json['manufacturing_places_debug_tags'].cast<String>()
             : null;
-    additives = json['additives'];
-    ingredientsText = json['ingredients_text'];
+    additives = json.containsKey('additives') == true
+        ? json['additives'].toString()
+        : null;
+    ingredientsText = json.containsKey('ingredients_text') == true
+        ? json['ingredients_text'].toString()
+        : null;
     additivesTags = json.containsKey('additives_tags') == true
         ? json['additives_tags'].cast<String>()
         : null;
@@ -646,7 +756,9 @@ class Product {
     labelsNextHierarchy = json.containsKey('labels_next_hierarchy') == true
         ? json['labels_next_hierarchy'].cast<String>()
         : null;
-    traces = json['traces'];
+    traces = json.containsKey('traces') == true
+        ? json['traces'].toString()
+        : null;
     ingredientsDebug = json.containsKey('ingredients_debug') == true
         ? json['ingredients_debug'].cast<String>()
         : null;
@@ -663,7 +775,9 @@ class Product {
         json.containsKey('ingredients_from_palm_oil_tags') == true
             ? json['ingredients_from_palm_oil_tags'].cast<String>()
             : null;
-    imageNutritionThumbUrl = json['image_nutrition_thumb_url'];
+    imageNutritionThumbUrl = json.containsKey('image_nutrition_thumb_url') == true
+        ? json['image_nutrition_thumb_url'].toString()
+        : null;
     packagingDebugTags = json.containsKey('packaging_debug_tags') == true
         ? json['packaging_debug_tags'].cast<String>()
         : null;
@@ -676,7 +790,9 @@ class Product {
     labelsNextTags = json.containsKey('labels_next_tags') == true
         ? json['labels_next_tags'].cast<String>()
         : null;
-    creator = json['creator'];
+    creator = json.containsKey('creator') == true
+        ? json['creator'].toString()
+        : null;
     langDebugTags = json.containsKey('lang_debug_tags') == true
         ? json['lang_debug_tags'].cast<String>()
         : null;
@@ -717,8 +833,12 @@ class Product {
     originsDebugTags = json.containsKey('origins_debug_tags') == true
         ? json['origins_debug_tags'].cast<String>()
         : null;
-    imageNutritionUrl = json['image_nutrition_url'];
-    id = json['id'];
+    imageNutritionUrl = json.containsKey('image_nutrition_url') == true
+        ? json['image_nutrition_url'].toString()
+        : null;
+    id = json.containsKey('id') == true
+        ? json['id'].toString()
+        : null;
   }
 
   Map<String, dynamic> toJson() {

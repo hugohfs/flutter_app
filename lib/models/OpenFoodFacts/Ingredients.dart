@@ -7,7 +7,11 @@ class Ingredients {
   Ingredients({this.percent, this.rank, this.id, this.text});
 
   Ingredients.fromJson(Map<String, dynamic> json) {
-    percent = json.containsKey('rank') == true ? json['rank'] : null;
+    percent = json.containsKey('percent') == true
+        ? json['percent'] is String
+        ? json['percent']
+        : json['percent'].toString()
+        : null;
     rank = json.containsKey('rank') == true
         ? json['rank'] is String ? json['rank'] : json['rank'].toString()
         : null;
