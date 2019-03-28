@@ -25,6 +25,7 @@ dependencies:
   json_annotation: ^2.0.0
   http: 0.12.0+1
   font_awesome_flutter: 8.4.0
+  barcode_scan:
 
   #firebase_auth: ^0.8.1+4
   firebase_auth: ^0.6.6

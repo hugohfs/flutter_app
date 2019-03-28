@@ -8,6 +8,7 @@ import 'package:hfs_flutter_app/services/authentication.dart';
 import 'package:http/http.dart' as http;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart'
     as font_awesome_flutter;
+import 'package:barcode_scan/barcode_scan.dart';
 
 class OpenFoodFactsPage extends StatefulWidget {
   OpenFoodFactsPage({Key key, this.auth, this.userId, this.onSignedOut})
@@ -32,6 +33,8 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
   final _formKey = new GlobalKey<FormState>();
   String _errorMessage;
 
+  final _textEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -44,6 +47,11 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
                 onPressed: _signOut)
           ],
         ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () { _scanQR(); },
+          icon: Icon(Icons.camera_alt),
+          label: Text("Scan")),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: new Container(
             padding: EdgeInsets.all(16.0),
             child: new Form(
@@ -74,6 +82,7 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0),
       child: new TextFormField(
+        controller: _textEditingController,
         maxLines: 1,
         keyboardType: TextInputType.emailAddress,
         autofocus: false,
@@ -167,46 +176,68 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
             future: _OffObject,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return ListView(shrinkWrap: true, children: <Widget>[
-                  Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                      child: Wrap(
-                          alignment: WrapAlignment.center,
-                          children: <Widget>[
-                            snapshot.data.product.imageFrontSmallUrl != null
-                              ? Image.network(snapshot.data.product.imageFrontSmallUrl)
-                              : Image.asset('assets/not_found.png')
-                          ]
-                      )
-                  ),
-                  Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                      child: new Wrap(children: <Widget>[
-                        Text("Generic Name: ",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(snapshot.data.product.productName != null
-                            ? snapshot.data.product.productName
-                            : "No data found")
-                      ])),
-                  Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                      child: new Wrap(children: <Widget>[
-                        Text("Ingredients text: ",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(snapshot.data.product.ingredientsText != null
-                            ? snapshot.data.product.ingredientsText
-                            : "No data found")
-                      ])),
-                  Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                      child: new Wrap(children: <Widget>[
-                        Text("Nutriments: ",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        Text(snapshot.data.product.nutriments != null
-                            ? snapshot.data.product.nutriments.toString()
-                            : "No data found")
-                      ]))
-                ]);
+                return
+                    //ListView(shrinkWrap: true,
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                      Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+                          child: Wrap(children: <Widget>[
+                            (snapshot.data.product != null &&
+                                    snapshot.data.product.imageFrontSmallUrl !=
+                                        null)
+                                ? Image.network(
+                                    snapshot.data.product.imageFrontSmallUrl)
+                                : Image.asset('assets/not_found.png')
+                          ])),
+                      Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+                          child: new Wrap(children: <Widget>[
+                            Text("Generic Name: ",
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            Text((snapshot.data.product != null &&
+                                    snapshot.data.product.productName != null)
+                                ? snapshot.data.product.productName
+                                : "No data found")
+                          ])),
+                      Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+                          child: new Wrap(children: <Widget>[
+                            Text("Ingredients text: ",
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            Text((snapshot.data.product != null &&
+                                    snapshot.data.product.ingredientsText !=
+                                        null)
+                                ? snapshot.data.product.ingredientsText
+                                : "No data found")
+                          ])),
+                      Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+                          child: new Wrap(children: <Widget>[
+                            Text("Nutriments: ",
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            Text((snapshot.data.product != null &&
+                                    snapshot.data.product.nutriments != null)
+                                ? snapshot.data.product.nutriments.toString()
+                                : "No data found")
+                          ])),
+                      Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+                          child: new Wrap(children: <Widget>[
+                            Text("Creator: ",
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                            Text((snapshot.data.product != null &&
+                                    snapshot.data.product.creator != null)
+                                ? snapshot.data.product.creator.toString()
+                                : "No data found")
+                          ]))
+                    ]);
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
@@ -323,4 +354,34 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
       );
     }
   }
+
+  Future _scanQR() async {
+    try{
+      String qrResult = await BarcodeScanner.scan();
+      setState(() {
+        _textEditingController.text = qrResult;
+        //_barcode = qrResult;
+      });
+    } on PlatformException catch(e) {
+      if(e.code == BarcodeScanner.CameraAccessDenied) {
+        setState(() {
+          _textEditingController.text = "Camera permission was denied";
+        });
+      } else {
+        setState(() {
+          _textEditingController.text = "Unknown error $e";
+        });
+      }
+    } on FormatException {
+      setState(() {
+        _textEditingController.text = "You pressed the back button before scanning anything";
+      });
+    } catch(e) {
+      setState(() {
+        _textEditingController.text = "Unknown error $e";
+      });
+    }
+  }
+
 }
+
