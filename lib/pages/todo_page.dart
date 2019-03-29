@@ -65,15 +65,6 @@ class _TodoPageState extends State<TodoPage> {
     });
   }
 
-  _signOut() async {
-    try {
-      await widget.auth.signOut();
-      widget.onSignedOut();
-    } catch (e) {
-      print(e);
-    }
-  }
-
   _addNewTodo(String todoItem) {
     if (todoItem.length > 0) {
 
@@ -180,13 +171,7 @@ class _TodoPageState extends State<TodoPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text('Todo List Firebase' ),
-          actions: <Widget>[
-            new FlatButton(
-                child: new Text('Logout',
-                    style: new TextStyle(fontSize: 17.0, color: Colors.white)),
-                onPressed: _signOut)
-          ],
+          title: new Text('Todo List Firebase' )
         ),
         body: _showTodoList(),
         floatingActionButton: FloatingActionButton(

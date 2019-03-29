@@ -126,7 +126,11 @@ class _HomePageState extends State<HomePage> {
                 onPressed: _signOut)
           ],
         ),
-        body: MainMenuPage(auth: widget.auth,),
+        body: MainMenuPage(
+          userId: widget.userId,
+          auth: widget.auth,
+          onSignedOut: widget.onSignedOut,
+        ),
     );
   }
 }

@@ -6,19 +6,13 @@ import 'package:hfs_flutter_app/pages/baby_name_votes.dart';
 import 'package:hfs_flutter_app/pages/todo_page.dart';
 import 'package:hfs_flutter_app/services/authentication.dart';
 
-//class _MainMenuState extends State<MainMenu> {
-class MainMenu extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MainMenuPage();
-  }
-}
-
 class MainMenuPage extends StatefulWidget {
-  MainMenuPage({Key key, this.auth})
+  MainMenuPage({Key key, this.auth, this.userId, this.onSignedOut})
       : super(key: key);
 
   final BaseAuth auth;
+  final VoidCallback onSignedOut;
+  final String userId;
 
 
   @override

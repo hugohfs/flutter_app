@@ -61,6 +61,11 @@ flutter:
   assets:
     - assets/flutter-icon.png
     - assets/not_found.png
+    - assets/nutriscore-a.png
+    - assets/nutriscore-b.png
+    - assets/nutriscore-c.png
+    - assets/nutriscore-d.png
+    - assets/nutriscore-e.png
     - assets/Open_Food_Facts_JSON_Example_HFS.json
 
   # To add assets to your application, add an assets section, like this:

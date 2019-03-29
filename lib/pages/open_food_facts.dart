@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hfs_flutter_app/models/OpenFoodFacts/OffObject.dart';
-import 'package:hfs_flutter_app/models/OpenFoodFacts/Post.dart';
 import 'package:hfs_flutter_app/services/authentication.dart';
 import 'package:http/http.dart' as http;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart'
@@ -24,8 +23,7 @@ class OpenFoodFactsPage extends StatefulWidget {
 
 class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
   String _textMessage;
-  Future<Post> _post;
-  Future<OffObject> _OffObject;
+  Future<OffObject> _offObject;
 
   String _barcode;
   final _baseUrl = 'https://world.openfoodfacts.org/api/v0/product/';
@@ -38,20 +36,13 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Open Food Facts'),
-          actions: <Widget>[
-            new FlatButton(
-                child: new Text('Logout',
-                    style: new TextStyle(fontSize: 17.0, color: Colors.white)),
-                onPressed: _signOut)
-          ],
-        ),
+        appBar: new AppBar(title: new Text('Open Food Facts')),
         floatingActionButton: FloatingActionButton.extended(
-          onPressed: () { _scanQR(); },
-          icon: Icon(Icons.camera_alt),
-          label: Text("Scan")),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+            onPressed: () {
+              _scanQR();
+            },
+            icon: Icon(Icons.camera_alt),
+            label: Text("Scan")),
         body: new Container(
             padding: EdgeInsets.all(16.0),
             child: new Form(
@@ -59,9 +50,9 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
               child: new ListView(
                 shrinkWrap: true,
                 children: <Widget>[
-                  _showButtonGetFromLocalFile(),
-                  _showButtonGetFromAPI(),
+                  //_showButtonGetFromLocalFile(),
                   _showInputTextBarcodeNumber(),
+                  _showButtonGetFromAPI(),
                   _showErrorMessage(),
                   _showTextResult(),
                 ],
@@ -69,18 +60,9 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
             )));
   }
 
-  _signOut() async {
-    try {
-      await widget.auth.signOut();
-      widget.onSignedOut();
-    } catch (e) {
-      print(e);
-    }
-  }
-
   Widget _showInputTextBarcodeNumber() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
       child: new TextFormField(
         controller: _textEditingController,
         maxLines: 1,
@@ -98,24 +80,6 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
     );
   }
 
-  Widget _showButtonGetFromLocalFile() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-      child: Center(
-          child: RaisedButton(
-        elevation: 5.0,
-        shape: new RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(30.0)),
-        color: Colors.blue,
-        child: Text('Read data from JSON File',
-            style: new TextStyle(fontSize: 20.0, color: Colors.white)),
-        onPressed: () {
-          _getDataFromFile(context);
-        },
-      )),
-    );
-  }
-
   Widget _showButtonGetFromAPI() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
@@ -125,12 +89,9 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
         shape: new RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(30.0)),
         color: Colors.blue,
-        child: Text('Read data JSON API',
+        child: Text('Get data from Open Food Facts API',
             style: new TextStyle(fontSize: 20.0, color: Colors.white)),
         onPressed: _validateAndSubmit,
-        /*() {
-          _getDataFromAPI();
-        },*/
       )),
     );
   }
@@ -138,20 +99,13 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
   void _validateAndSubmit() async {
     setState(() {
       _errorMessage = "";
-      //_isLoading = true;
     });
     if (_validateAndSave()) {
-      String barcode = "";
       try {
         _getDataFromAPI();
-        /*setState(() {
-        _isLoading = false;
-      });*/
-
       } catch (e) {
         print('Error: $e');
         setState(() {
-          //_isLoading = false;
           _errorMessage = e.message;
         });
       }
@@ -169,75 +123,14 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
   }
 
   Widget _showTextResult() {
-    if (_OffObject != null) {
+    if (_offObject != null) {
       return Padding(
           padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
           child: FutureBuilder<OffObject>(
-            future: _OffObject,
+            future: _offObject,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return
-                    //ListView(shrinkWrap: true,
-                    Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                      Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                          child: Wrap(children: <Widget>[
-                            (snapshot.data.product != null &&
-                                    snapshot.data.product.imageFrontSmallUrl !=
-                                        null)
-                                ? Image.network(
-                                    snapshot.data.product.imageFrontSmallUrl)
-                                : Image.asset('assets/not_found.png')
-                          ])),
-                      Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                          child: new Wrap(children: <Widget>[
-                            Text("Generic Name: ",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text((snapshot.data.product != null &&
-                                    snapshot.data.product.productName != null)
-                                ? snapshot.data.product.productName
-                                : "No data found")
-                          ])),
-                      Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                          child: new Wrap(children: <Widget>[
-                            Text("Ingredients text: ",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text((snapshot.data.product != null &&
-                                    snapshot.data.product.ingredientsText !=
-                                        null)
-                                ? snapshot.data.product.ingredientsText
-                                : "No data found")
-                          ])),
-                      Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                          child: new Wrap(children: <Widget>[
-                            Text("Nutriments: ",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text((snapshot.data.product != null &&
-                                    snapshot.data.product.nutriments != null)
-                                ? snapshot.data.product.nutriments.toString()
-                                : "No data found")
-                          ])),
-                      Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-                          child: new Wrap(children: <Widget>[
-                            Text("Creator: ",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Text((snapshot.data.product != null &&
-                                    snapshot.data.product.creator != null)
-                                ? snapshot.data.product.creator.toString()
-                                : "No data found")
-                          ]))
-                    ]);
+                return _showProductInfo(snapshot);
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
@@ -264,60 +157,82 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
     }
   }
 
-  _getDataFromFile(BuildContext context) async {
-    // WAY 1
-    String jsonString = "";
-    jsonString = await DefaultAssetBundle.of(context)
-        .loadString("assets/Open_Food_Facts_JSON_Example_HFS.json");
-    //print("jsonString:" + jsonString);
-
-    Map userMap = jsonDecode(jsonString);
-    var model = OffObject.fromJson(userMap);
-    //print(model.product.genericNameFr);
-
-    // WAY 2
-    Map<String, dynamic> dmap = await DefaultAssetBundle.of(context)
-        .loadString("assets/Open_Food_Facts_JSON_Example_HFS.json")
-        .then((jsonStr) => jsonDecode(jsonStr));
-    //print(dmap);
-
-    OffObject offModel = new OffObject.fromJson(dmap);
-    //print(offModel.product.genericNameFr);
-
-    setState(() {
-      _textMessage = "genericName: " +
-          model.product.genericName +
-          "\n\n" +
-          "ingredientsText: " +
-          model.product.ingredientsText +
-          "\n\n" +
-          "nutriments: " +
-          model.product.nutriments.toString();
-      //_textMessage = offModel.product.nutriments.toString();
-      _post = null;
-      _OffObject = null;
-    });
+  Column _showProductInfo(AsyncSnapshot<OffObject> snapshot) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
+        Widget>[
+      Padding(
+          padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+          child: Wrap(children: <Widget>[
+            (snapshot.data.product != null &&
+                    snapshot.data.product.imageFrontSmallUrl != null)
+                ? Image.network(snapshot.data.product.imageFrontSmallUrl)
+                : Image.asset('assets/not_found.png')
+          ])),
+      Padding(
+          padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+          child: new Wrap(children: <Widget>[
+            Text("Creator: ", style: TextStyle(fontWeight: FontWeight.bold)),
+            Text((snapshot.data.product != null &&
+                snapshot.data.product.creator != null)
+                ? snapshot.data.product.creator.toString()
+                : "No data found")
+          ])),
+      Padding(
+          padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+          child: new Wrap(children: <Widget>[
+            Text("Generic Name: ",
+                style: TextStyle(fontWeight: FontWeight.bold)),
+            Text((snapshot.data.product != null &&
+                    snapshot.data.product.genericName != null)
+                ? snapshot.data.product.genericName
+                : "No data found")
+          ])),
+      Padding(
+          padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+          child: new Wrap(children: <Widget>[
+            Text("Product Name: ",
+                style: TextStyle(fontWeight: FontWeight.bold)),
+            Text((snapshot.data.product != null &&
+                    snapshot.data.product.productName != null)
+                ? snapshot.data.product.productName
+                : "No data found")
+          ])),
+      Padding(
+          padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+          child: new Wrap(children: <Widget>[
+            Text("Ingredients text: ",
+                style: TextStyle(fontWeight: FontWeight.bold)),
+            Text((snapshot.data.product != null &&
+                    snapshot.data.product.ingredientsText != null)
+                ? snapshot.data.product.ingredientsText
+                : "No data found")
+          ])),
+      Padding(
+          padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
+          child: new Wrap(children: <Widget>[
+            (snapshot.data.product != null &&
+                    snapshot.data.product.nutritionGradeFr != null)
+                ? snapshot.data.product.nutritionGradeFr == 'a'
+                    ? Image.asset('assets/nutriscore-a.png')
+                    : snapshot.data.product.nutritionGradeFr == 'b'
+                        ? Image.asset('assets/nutriscore-b.png')
+                        : snapshot.data.product.nutritionGradeFr == 'c'
+                            ? Image.asset('assets/nutriscore-c.png')
+                            : snapshot.data.product.nutritionGradeFr == 'd'
+                                ? Image.asset('assets/nutriscore-d.png')
+                                : snapshot.data.product.nutritionGradeFr == 'e'
+                                    ? Image.asset('assets/nutriscore-e.png')
+                                    : Image.asset('assets/not_found.png')
+                : Image.asset('assets/not_found.png')
+          ])),
+    ]);
   }
 
   _getDataFromAPI() {
     setState(() {
-      _OffObject = _fetchOffObject();
-      //_post = _fetchPost();
+      _offObject = _fetchOffObject();
       _textMessage = null;
     });
-  }
-
-  Future<Post> _fetchPost() async {
-    final response =
-        await http.get('https://jsonplaceholder.typicode.com/posts/1');
-
-    if (response.statusCode == 200) {
-      // If server returns an OK response, parse the JSON
-      return Post.fromJson(json.decode(response.body));
-    } else {
-      // If that response was not OK, throw an error.
-      throw Exception('Failed to load post');
-    }
   }
 
   Future<OffObject> _fetchOffObject() async {
@@ -356,14 +271,15 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
   }
 
   Future _scanQR() async {
-    try{
+    try {
       String qrResult = await BarcodeScanner.scan();
       setState(() {
         _textEditingController.text = qrResult;
-        //_barcode = qrResult;
       });
-    } on PlatformException catch(e) {
-      if(e.code == BarcodeScanner.CameraAccessDenied) {
+
+      _validateAndSubmit();
+    } on PlatformException catch (e) {
+      if (e.code == BarcodeScanner.CameraAccessDenied) {
         setState(() {
           _textEditingController.text = "Camera permission was denied";
         });
@@ -374,14 +290,65 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
       }
     } on FormatException {
       setState(() {
-        _textEditingController.text = "You pressed the back button before scanning anything";
+        _textEditingController.text =
+            "You pressed the back button before scanning anything";
       });
-    } catch(e) {
+    } catch (e) {
       setState(() {
         _textEditingController.text = "Unknown error $e";
       });
     }
   }
 
-}
+  Widget _showButtonGetFromLocalFile() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+      child: Center(
+          child: RaisedButton(
+        elevation: 5.0,
+        shape: new RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(30.0)),
+        color: Colors.blue,
+        child: Text('Get data from Local File',
+            style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+        onPressed: () {
+          _getDataFromFile(context);
+        },
+      )),
+    );
+  }
 
+  _getDataFromFile(BuildContext context) async {
+    // WAY 1
+    String jsonString = "";
+    jsonString = await DefaultAssetBundle.of(context)
+        .loadString("assets/Open_Food_Facts_JSON_Example_HFS.json");
+    //print("jsonString:" + jsonString);
+
+    Map userMap = jsonDecode(jsonString);
+    var model = OffObject.fromJson(userMap);
+    //print(model.product.genericNameFr);
+
+    // WAY 2
+    Map<String, dynamic> dmap = await DefaultAssetBundle.of(context)
+        .loadString("assets/Open_Food_Facts_JSON_Example_HFS.json")
+        .then((jsonStr) => jsonDecode(jsonStr));
+    //print(dmap);
+
+    OffObject offModel = new OffObject.fromJson(dmap);
+    //print(offModel.product.genericNameFr);
+
+    setState(() {
+      _textMessage = "genericName: " +
+          model.product.genericName +
+          "\n\n" +
+          "ingredientsText: " +
+          model.product.ingredientsText +
+          "\n\n" +
+          "nutriments: " +
+          model.product.nutriments.toString();
+      //_textMessage = offModel.product.nutriments.toString();
+      _offObject = null;
+    });
+  }
+}
