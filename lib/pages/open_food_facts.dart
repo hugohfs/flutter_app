@@ -173,7 +173,7 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
           child: new Wrap(children: <Widget>[
             Text("Creator: ", style: TextStyle(fontWeight: FontWeight.bold)),
             Text((snapshot.data.product != null &&
-                snapshot.data.product.creator != null)
+                    snapshot.data.product.creator != null)
                 ? snapshot.data.product.creator.toString()
                 : "No data found")
           ])),
@@ -210,20 +210,34 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
       Padding(
           padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
           child: new Wrap(children: <Widget>[
+            Text("Nutriscore: ", style: TextStyle(fontWeight: FontWeight.bold)),
             (snapshot.data.product != null &&
-                    snapshot.data.product.nutritionGradeFr != null)
-                ? snapshot.data.product.nutritionGradeFr == 'a'
+                    snapshot.data.product.nutritionGrades != null)
+                ? snapshot.data.product.nutritionGrades == 'a'
                     ? Image.asset('assets/nutriscore-a.png')
-                    : snapshot.data.product.nutritionGradeFr == 'b'
+                    : snapshot.data.product.nutritionGrades == 'b'
                         ? Image.asset('assets/nutriscore-b.png')
-                        : snapshot.data.product.nutritionGradeFr == 'c'
+                        : snapshot.data.product.nutritionGrades == 'c'
                             ? Image.asset('assets/nutriscore-c.png')
-                            : snapshot.data.product.nutritionGradeFr == 'd'
+                            : snapshot.data.product.nutritionGrades == 'd'
                                 ? Image.asset('assets/nutriscore-d.png')
-                                : snapshot.data.product.nutritionGradeFr == 'e'
+                                : snapshot.data.product.nutritionGrades == 'e'
                                     ? Image.asset('assets/nutriscore-e.png')
                                     : Image.asset('assets/not_found.png')
-                : Image.asset('assets/not_found.png')
+                : (snapshot.data.product != null &&
+                        snapshot.data.product.nutritionGradeFr != null)
+                    ? snapshot.data.product.nutritionGradeFr == 'a'
+                        ? Image.asset('assets/nutriscore-a.png')
+                        : snapshot.data.product.nutritionGradeFr == 'b'
+                            ? Image.asset('assets/nutriscore-b.png')
+                            : snapshot.data.product.nutritionGradeFr == 'c'
+                                ? Image.asset('assets/nutriscore-c.png')
+                                : snapshot.data.product.nutritionGradeFr == 'd'
+                                    ? Image.asset('assets/nutriscore-d.png')
+                                    : snapshot.data.product.nutritionGradeFr == 'e'
+                                        ? Image.asset('assets/nutriscore-e.png')
+                                        : Image.asset('assets/not_found.png')
+                    : Image.asset('assets/not_found.png')
           ])),
     ]);
   }
