@@ -1,5 +1,7 @@
+import 'package:hfs_flutter_app/globals/globals.dart' as globals;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:hfs_flutter_app/components/Drawer.dart';
 import 'package:hfs_flutter_app/pages/baby_name_votes.dart';
 import 'package:hfs_flutter_app/pages/friendly_chat.dart';
 import 'package:hfs_flutter_app/pages/open_food_facts.dart';
@@ -7,7 +9,7 @@ import 'package:hfs_flutter_app/pages/startup_name_generator.dart';
 import 'package:hfs_flutter_app/pages/todo_page.dart';
 import 'package:hfs_flutter_app/services/authentication.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart'
-  as font_awesome_flutter;
+    as font_awesome_flutter;
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.auth, this.userId, this.onSignedOut})
@@ -21,12 +23,11 @@ class HomePage extends StatefulWidget {
   State<StatefulWidget> createState() => new _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
   final FirebaseDatabase _database = FirebaseDatabase.instance;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   bool _isEmailVerified = false;
-  String _userAccountEmail = "";
 
   int _selectedIndex = 1;
   /*final _widgetOptions = [
@@ -38,16 +39,20 @@ class _HomePageState extends State<HomePage> {
     Text('Index 5: Open Food Facts'),
   ];*/
 
+  TabController _tabController;
+
   @override
   void initState() {
     super.initState();
+
+    _tabController = new TabController(length: 5, vsync: this);
 
     _checkEmailVerification();
 
     widget.auth.getCurrentUser().then((user) {
       setState(() {
         if (user != null) {
-          _userAccountEmail = user?.email;
+          globals.userAccountEmail = user?.email;
         }
       });
     });
@@ -134,54 +139,124 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: AppBar(
-          title: Text('Home'),
-          /*actions: <Widget>[
-            new FlatButton(
-              child: new Text('Logout',
-                style: new TextStyle(fontSize: 17.0, color: Colors.white)),
-              onPressed: _signOut)
-          ]*/
-      ),
-      drawer: Drawer(
-          child: ListView(
+      //appBar: new MyAppBar(
+          title: _showTitle(_selectedIndex),
+          actions: <Widget>[
+            _showActionButtons(_selectedIndex),
+          ]/*,
+          bottom: TabBar(
+            unselectedLabelColor: Colors.white,
+            labelColor: Colors.amber,
+            tabs: [
+              new Tab(icon: new Icon(Icons.favorite_border)),
+              new Tab(icon: new Icon(Icons.call)),
+              new Tab(icon: new Icon(Icons.chat)),
+              new Tab(icon: new Icon(Icons.notifications))
+            ],
+            controller: _tabController,
+            indicatorColor: Colors.white,
+            indicatorSize: TabBarIndicatorSize.tab,),
+            bottomOpacity: 1,*/
+          ),
+      drawer: new Drawer(child: ListView(
         children: <Widget>[
           UserAccountsDrawerHeader(
-            accountName: Text(_userAccountEmail),
-            accountEmail: Text(_userAccountEmail),
+            accountName: Text(globals.userAccountEmail),
+            accountEmail: Text(globals.userAccountEmail),
             currentAccountPicture: new CircleAvatar(
               backgroundColor: Colors.white,
-              child: Text(_userAccountEmail.length > 0 ? _userAccountEmail[0].toUpperCase() : ""),
+              child: Text(globals.userAccountEmail.length > 0
+                  ? globals.userAccountEmail[0].toUpperCase()
+                  : ""),
             ),
           ),
           ListTile(
             title: Text("Close"),
             trailing: Icon(Icons.close),
-            onTap: ()=> Navigator.of(context).pop(),
+            onTap: () => Navigator.of(context).pop(),
           ),
           ListTile(
-            title: Text("Logout"),
-            trailing: Icon(Icons.exit_to_app),
-            onTap: _signOut
-          ),
+              title: Text("Logout"),
+              trailing: Icon(Icons.exit_to_app),
+              onTap: _signOut),
         ],
-      )),
-      body: Center(
-        child: _showCurrentTab(_selectedIndex)
+      ),),
+        /*drawer: new Drawer(
+          child: ListView(
+        children: <Widget>[
+          UserAccountsDrawerHeader(
+            accountName: Text(globals.userAccountEmail),
+            accountEmail: Text(globals.userAccountEmail),
+            currentAccountPicture: new CircleAvatar(
+              backgroundColor: Colors.white,
+              child: Text(globals.userAccountEmail.length > 0
+                  ? globals.userAccountEmail[0].toUpperCase()
+                  : ""),
+            ),
+          ),
+          ListTile(
+            title: Text("Close"),
+            trailing: Icon(Icons.close),
+            onTap: () => Navigator.of(context).pop(),
+          ),
+          ListTile(
+              title: Text("Logout"),
+              trailing: Icon(Icons.exit_to_app),
+              onTap: _signOut),
+        ],
+      )),*/
+      /*body: TabBarView(
+        children: [
+          OpenFoodFactsPage(),
+          new Text("This is call Tab View"),
+          new Text("This is chat Tab View"),
+          new Text("This is notification Tab View"),
+        ],
+        controller: _tabController,
+      ),*/
+      body: Center(child: _showCurrentTab(_selectedIndex)
           //_widgetOptions.elementAt(_selectedIndex)
-      ),
+          ),
       bottomNavigationBar: BottomNavigationBar(
           items: <BottomNavigationBarItem> [
             BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home'), backgroundColor: Theme.of(context).accentColor),
-            BottomNavigationBarItem(icon: Icon(Icons.favorite_border), title: Text('Name Generator'), backgroundColor: Theme.of(context).accentColor),
+            BottomNavigationBarItem(icon: Icon(Icons.favorite_border), title: Text('NameGenerator'), backgroundColor: Theme.of(context).accentColor),
             BottomNavigationBarItem(icon: Icon(Icons.chat), title: Text('Chat')),
-            BottomNavigationBarItem(icon: Icon(Icons.child_care), title: Text('Baby Name')),
+            BottomNavigationBarItem(icon: Icon(Icons.child_care), title: Text('BabyName')),
             BottomNavigationBarItem(icon: Icon(Icons.list), title: Text('Todo')),
             BottomNavigationBarItem(icon: Icon(font_awesome_flutter.FontAwesomeIcons.barcode), title: Text('OpenFoodFacts')),
           ],
         currentIndex: _selectedIndex,
         fixedColor: Colors.deepPurple,
-        onTap: _onItemTapped,),
-      );
+        onTap: _onItemTapped,
+      )
+    );
+  }
+
+  Widget _showTitle(int _selectedIndex) {
+    switch (_selectedIndex) {
+      case 0:
+        return Text('Home');
+        break;
+      case 1:
+        return Text('Startup Name Generator');
+        break;
+      case 2:
+        return Text('Friendly Chat');
+        break;
+      case 3:
+        return Text('Baby Name Votes');
+        break;
+      case 4:
+        return Text('Todo List');
+        break;
+      case 5:
+        return Text('Open Food Facts');
+        break;
+      default:
+        return Text("Index tab not defined");
+        break;
+    }
   }
 
   void _onItemTapped(int index) {
@@ -213,7 +288,9 @@ class _HomePageState extends State<HomePage> {
         return StartupNameGenerator();
         break;
       case 2:
-        return ChatScreen(auth: widget.auth,);
+        return ChatScreen(
+          auth: widget.auth,
+        );
         break;
       case 3:
         return BabyNameVotes();
@@ -227,14 +304,46 @@ class _HomePageState extends State<HomePage> {
       default:
         return Text("Index tab not defined");
         break;
-
-
-
     }
   }
 
-  Container _showHome() {
-    return Container(
+  Widget _showActionButtons(int _selectedIndex) {
+    switch (_selectedIndex) {
+      case 0:
+        return IconButton(icon: Icon((Icons.exit_to_app)), onPressed: _signOut);
+        break;
+      case 1:
+        return IconButton(icon: const Icon(Icons.list), onPressed: null);
+        break;
+      case 2:
+        return IconButton(
+          icon: const Icon(Icons.arrow_back),
+        );
+        break;
+      case 3:
+        return IconButton(
+          icon: const Icon(Icons.arrow_back),
+        );
+        break;
+      case 4:
+        return IconButton(
+          icon: const Icon(Icons.arrow_back),
+        );
+        break;
+      case 5:
+        return IconButton(
+          icon: const Icon(Icons.arrow_back),
+        );
+        break;
+      default:
+        return Text("Index tab not defined");
+        break;
+    }
+  }
+
+
+    Container _showHome() {
+      return Container(
         child: Column(children: <Widget>[
           _showLogo(),
           Padding(
@@ -330,8 +439,7 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => OpenFoodFactsPage()),
+                    MaterialPageRoute(builder: (context) => OpenFoodFactsPage()),
                   );
                 },
               ),
@@ -339,5 +447,5 @@ class _HomePageState extends State<HomePage> {
           ),
         ]),
       );
+    }
   }
-}

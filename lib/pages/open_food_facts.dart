@@ -36,7 +36,7 @@ class _OpenFoodFactsPageState extends State<OpenFoodFactsPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(title: new Text('Open Food Facts')),
+        /*appBar: new AppBar(title: new Text('Open Food Facts')),*/
         floatingActionButton: FloatingActionButton.extended(
             onPressed: () {
               _scanQR();

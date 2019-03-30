@@ -60,10 +60,10 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
+      /*appBar: new AppBar(
         title: new Text("Friendly Chat"),
         elevation: Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
-      ),
+      ),*/
       body: new Container(
           child: new Column(
             children: <Widget>[

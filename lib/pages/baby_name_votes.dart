@@ -21,7 +21,7 @@ class _BabyNameVotesPageState extends State<BabyNameVotesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Baby Name Votes')),
+        /*appBar: AppBar(title: Text('Baby Name Votes')),*/
         body: _buildBody(context),
         floatingActionButton: FloatingActionButton(
           onPressed: () {

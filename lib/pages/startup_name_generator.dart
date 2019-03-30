@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:hfs_flutter_app/components/MyAppBar.dart';
 
 class StartupNameGenerator extends StatelessWidget {
   @override
@@ -20,20 +21,32 @@ class RandomWordsState extends State<RandomWords> {
 
   @override
   Widget build(BuildContext context) {
+    /*final ScaffoldState scaffoldState = context.rootAncestorStateOfType(TypeMatcher<ScaffoldState>());
+    scaffoldState.openDrawer();*/
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
+      //appBar: new MyAppBar(
         title: Text('Startup Name Generator'),
         actions: <Widget>[
-          new IconButton(icon: const Icon(Icons.list), onPressed: _pushSaved),
+          new IconButton(icon: const Icon(Icons.list), onPressed: pushSaved),
         ],
-      ),
+      ),*/
       body: _buildSuggestions(),
+        floatingActionButton: FloatingActionButton(
+          onPressed: pushSaved,
+          tooltip: 'Show favourites',
+          child: Icon(Icons.favorite),
+        )
     );
     final wordPair = WordPair.random();
     return Text(wordPair.asPascalCase);
   }
 
-  void _pushSaved() {
+  Widget _showFavourites() {
+
+}
+
+  void pushSaved() {
     Navigator.of(context).push(
       new MaterialPageRoute<void>(
         builder: (BuildContext context) {

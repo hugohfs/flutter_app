@@ -170,9 +170,9 @@ class _TodoPageState extends State<TodoPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(
+        /*appBar: new AppBar(
           title: new Text('Todo List Firebase' )
-        ),
+        ),*/
         body: _showTodoList(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
