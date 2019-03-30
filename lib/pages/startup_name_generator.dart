@@ -21,8 +21,6 @@ class RandomWordsState extends State<RandomWords> {
 
   @override
   Widget build(BuildContext context) {
-    /*final ScaffoldState scaffoldState = context.rootAncestorStateOfType(TypeMatcher<ScaffoldState>());
-    scaffoldState.openDrawer();*/
     return Scaffold(
       /*appBar: AppBar(
       //appBar: new MyAppBar(
@@ -32,19 +30,16 @@ class RandomWordsState extends State<RandomWords> {
         ],
       ),*/
       body: _buildSuggestions(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: pushSaved,
-          tooltip: 'Show favourites',
-          child: Icon(Icons.favorite),
-        )
+      floatingActionButton: FloatingActionButton(
+        onPressed: pushSaved,
+        tooltip: 'Show favourites',
+        child: Icon(Icons.favorite),
+      ), floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
+
     final wordPair = WordPair.random();
     return Text(wordPair.asPascalCase);
   }
-
-  Widget _showFavourites() {
-
-}
 
   void pushSaved() {
     Navigator.of(context).push(

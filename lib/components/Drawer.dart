@@ -6,8 +6,8 @@ class MyDrawer extends Drawer {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer();
-      /*child: ListView(children: <Widget>[
+    return Drawer(
+      child: ListView(children: <Widget>[
         UserAccountsDrawerHeader(
           accountName: Text(globals.userAccountEmail),
           accountEmail: Text(globals.userAccountEmail),
@@ -19,15 +19,15 @@ class MyDrawer extends Drawer {
           ),
         ),
         ListTile(
-          title: Text("Closedddd"),
+          title: Text("Close"),
           trailing: Icon(Icons.close),
           onTap: () => Navigator.of(context).pop(),
         ),
         ListTile(
-            title: Text("Logouttttt"),
+            title: Text("Logout"),
             trailing: Icon(Icons.exit_to_app),
             onTap: null)
       ]),
-    );*/
+    );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:hfs_flutter_app/globals/globals.dart' as globals;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +24,11 @@ class HomePage extends StatefulWidget {
   State<StatefulWidget> createState() => new _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
-  final FirebaseDatabase _database = FirebaseDatabase.instance;
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  bool _isEmailVerified = false;
-
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
   /*final _widgetOptions = [
     Text('Index 0: Home'),
     Text('Index 1: Startup Name Generator'),
@@ -39,13 +38,13 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     Text('Index 5: Open Food Facts'),
   ];*/
 
-  TabController _tabController;
+  //TabController _tabController;
 
   @override
   void initState() {
     super.initState();
 
-    _tabController = new TabController(length: 5, vsync: this);
+    //_tabController = new TabController(length: 5, vsync: this);
 
     _checkEmailVerification();
 
@@ -59,8 +58,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   }
 
   void _checkEmailVerification() async {
-    _isEmailVerified = await widget.auth.isEmailVerified();
-    if (!_isEmailVerified) {
+    globals.isEmailVerified = await widget.auth.isEmailVerified();
+    if (!globals.isEmailVerified) {
       _showVerifyEmailDialog();
     }
   }
@@ -138,12 +137,12 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: AppBar(
-      //appBar: new MyAppBar(
-          title: _showTitle(_selectedIndex),
-          actions: <Widget>[
-            _showActionButtons(_selectedIndex),
-          ]/*,
+        appBar: AppBar(
+            //appBar: new MyAppBar(
+            title: _showTitle(_selectedIndex),
+            actions: <Widget>[
+              _showActionButtons(_selectedIndex),
+            ] /*,
           bottom: TabBar(
             unselectedLabelColor: Colors.white,
             labelColor: Colors.amber,
@@ -157,30 +156,32 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             indicatorColor: Colors.white,
             indicatorSize: TabBarIndicatorSize.tab,),
             bottomOpacity: 1,*/
-          ),
-      drawer: new Drawer(child: ListView(
-        children: <Widget>[
-          UserAccountsDrawerHeader(
-            accountName: Text(globals.userAccountEmail),
-            accountEmail: Text(globals.userAccountEmail),
-            currentAccountPicture: new CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Text(globals.userAccountEmail.length > 0
-                  ? globals.userAccountEmail[0].toUpperCase()
-                  : ""),
             ),
+        drawer: new Drawer(
+          child: ListView(
+            children: <Widget>[
+              UserAccountsDrawerHeader(
+                accountName: Text(globals.userAccountEmail),
+                accountEmail: Text(globals.userAccountEmail),
+                currentAccountPicture: new CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Text(globals.userAccountEmail.length > 0
+                      ? globals.userAccountEmail[0].toUpperCase()
+                      : ""),
+                ),
+              ),
+              ListTile(
+                title: Text("Close"),
+                trailing: Icon(Icons.close),
+                onTap: () => Navigator.of(context).pop(),
+              ),
+              ListTile(
+                  title: Text("Logout"),
+                  trailing: Icon(Icons.exit_to_app),
+                  onTap: _signOut),
+            ],
           ),
-          ListTile(
-            title: Text("Close"),
-            trailing: Icon(Icons.close),
-            onTap: () => Navigator.of(context).pop(),
-          ),
-          ListTile(
-              title: Text("Logout"),
-              trailing: Icon(Icons.exit_to_app),
-              onTap: _signOut),
-        ],
-      ),),
+        ),
         /*drawer: new Drawer(
           child: ListView(
         children: <Widget>[
@@ -205,7 +206,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               onTap: _signOut),
         ],
       )),*/
-      /*body: TabBarView(
+        /*body: TabBarView(
         children: [
           OpenFoodFactsPage(),
           new Text("This is call Tab View"),
@@ -214,23 +215,34 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         ],
         controller: _tabController,
       ),*/
-      body: Center(child: _showCurrentTab(_selectedIndex)
-          //_widgetOptions.elementAt(_selectedIndex)
-          ),
-      bottomNavigationBar: BottomNavigationBar(
-          items: <BottomNavigationBarItem> [
-            BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Home'), backgroundColor: Theme.of(context).accentColor),
-            BottomNavigationBarItem(icon: Icon(Icons.favorite_border), title: Text('NameGenerator'), backgroundColor: Theme.of(context).accentColor),
-            BottomNavigationBarItem(icon: Icon(Icons.chat), title: Text('Chat')),
-            BottomNavigationBarItem(icon: Icon(Icons.child_care), title: Text('BabyName')),
-            BottomNavigationBarItem(icon: Icon(Icons.list), title: Text('Todo')),
-            BottomNavigationBarItem(icon: Icon(font_awesome_flutter.FontAwesomeIcons.barcode), title: Text('OpenFoodFacts')),
+        body: Center(child: _showCurrentTab(_selectedIndex)
+            //_widgetOptions.elementAt(_selectedIndex)
+            ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                title: Text(globals.tabHomeName),
+                backgroundColor: Theme.of(context).accentColor),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.favorite_border),
+                title: Text(globals.tabNameGeneratorName),
+                backgroundColor: Theme.of(context).accentColor),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.chat), title: Text(globals.tabChatName)),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.child_care),
+                title: Text(globals.tabBabyNameName)),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.list), title: Text(globals.tabTodoListName)),
+            BottomNavigationBarItem(
+                icon: Icon(font_awesome_flutter.FontAwesomeIcons.barcode),
+                title: Text(globals.tabOpenFoodFactsName)),
           ],
-        currentIndex: _selectedIndex,
-        fixedColor: Colors.deepPurple,
-        onTap: _onItemTapped,
-      )
-    );
+          currentIndex: _selectedIndex,
+          fixedColor: Colors.deepPurple,
+          onTap: _onItemTapped,
+        ));
   }
 
   Widget _showTitle(int _selectedIndex) {
@@ -265,24 +277,10 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     });
   }
 
-  Widget _showLogo() {
-    return new Hero(
-      tag: 'hero',
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0),
-        child: CircleAvatar(
-          backgroundColor: Colors.transparent,
-          radius: 48.0,
-          child: Image.asset('assets/flutter-icon.png'),
-        ),
-      ),
-    );
-  }
-
   Widget _showCurrentTab(int _selectedIndex) {
     switch (_selectedIndex) {
       case 0:
-        return _showHome();
+        return _showHomeBody();
         break;
       case 1:
         return StartupNameGenerator();
@@ -308,9 +306,15 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   }
 
   Widget _showActionButtons(int _selectedIndex) {
-    switch (_selectedIndex) {
+    return IconButton(
+        icon: Icon((Icons.close)),
+        onPressed: () => SystemNavigator.pop());
+    /*switch (_selectedIndex) {
       case 0:
-        return IconButton(icon: Icon((Icons.exit_to_app)), onPressed: _signOut);
+        return IconButton(
+            icon: Icon((Icons.exit_to_app)), onPressed: () {
+          Navigator.of(context).pop();
+        });
         break;
       case 1:
         return IconButton(icon: const Icon(Icons.list), onPressed: null);
@@ -338,114 +342,38 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       default:
         return Text("Index tab not defined");
         break;
-    }
+    }*/
   }
 
+  Widget _showLogo() {
+    return new Hero(
+      tag: 'hero',
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0),
+        child: CircleAvatar(
+          backgroundColor: Colors.transparent,
+          radius: 48.0,
+          child: Image.asset('assets/flutter-icon.png'),
+        ),
+      ),
+    );
+  }
 
-    Container _showHome() {
-      return Container(
-        child: Column(children: <Widget>[
-          _showLogo(),
-          Padding(
+  Container _showHomeBody() {
+    return Container(
+      child: Column(children: <Widget>[
+        _showLogo(),
+        Padding(
             padding: const EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0),
-            child: Center(
-              child: RaisedButton(
-                elevation: 5.0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0)),
-                color: Colors.blue,
-                child: Text('Startup Name Generator',
-                    style: new TextStyle(fontSize: 20.0, color: Colors.white)),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => StartupNameGenerator()),
-                  );
-                },
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
             child: new Center(
-              child: RaisedButton(
-                elevation: 5.0,
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30.0)),
-                color: Colors.blue,
-                child: Text('Friendly Chat',
-                    style: new TextStyle(fontSize: 20.0, color: Colors.white)),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ChatScreen(
-                          auth: widget.auth,
-                        )),
-                  );
-                },
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-            child: Center(
-              child: RaisedButton(
-                elevation: 5.0,
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30.0)),
-                color: Colors.blue,
-                child: Text('Baby Name Votes',
-                    style: new TextStyle(fontSize: 20.0, color: Colors.white)),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => BabyNameVotes()),
-                  );
-                },
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-            child: Center(
-              child: RaisedButton(
-                elevation: 5.0,
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30.0)),
-                color: Colors.blue,
-                child: Text('TodoList',
-                    style: new TextStyle(fontSize: 20.0, color: Colors.white)),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TodoPage()),
-                  );
-                },
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-            child: Center(
-              child: RaisedButton(
-                elevation: 5.0,
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30.0)),
-                color: Colors.blue,
-                child: Text('OpenFoodFacts',
-                    style: new TextStyle(fontSize: 20.0, color: Colors.white)),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => OpenFoodFactsPage()),
-                  );
-                },
-              ),
-            ),
-          ),
-        ]),
-      );
-    }
+                child: Text("Wellcome to HFS Flutter App.",
+                    style: new TextStyle(fontSize: 22.0)))),
+        Padding(
+            padding: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+            child: new Center(
+                child: Text("You can navigate through the tabs.",
+                    style: new TextStyle(fontSize: 22.0))))
+      ]),
+    );
   }
+}
