@@ -1,7 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
+import 'package:hfs_flutter_app/pages/baby_name_votes.dart';
+import 'package:hfs_flutter_app/pages/friendly_chat.dart';
+import 'package:hfs_flutter_app/pages/open_food_facts.dart';
+import 'package:hfs_flutter_app/pages/startup_name_generator.dart';
+import 'package:hfs_flutter_app/pages/todo_page.dart';
 import 'package:hfs_flutter_app/services/authentication.dart';
-import 'package:hfs_flutter_app/pages/main_menu.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.auth, this.userId, this.onSignedOut})
@@ -13,7 +17,6 @@ class HomePage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => new _HomePageState();
-
 }
 
 class _HomePageState extends State<HomePage> {
@@ -22,7 +25,7 @@ class _HomePageState extends State<HomePage> {
 
   bool _isEmailVerified = false;
 
-  String _userEmail = "";
+  String _userAccountEmail = "";
 
   @override
   void initState() {
@@ -33,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     widget.auth.getCurrentUser().then((user) {
       setState(() {
         if (user != null) {
-          _userEmail = user?.email;
+          _userAccountEmail = user?.email;
         }
       });
     });
@@ -46,7 +49,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void _resentVerifyEmail(){
+  void _resentVerifyEmail() {
     widget.auth.sendEmailVerification();
     _showVerifyEmailSentDialog();
   }
@@ -86,7 +89,8 @@ class _HomePageState extends State<HomePage> {
         // return object of type Dialog
         return AlertDialog(
           title: new Text("Verify your account"),
-          content: new Text("Link to verify account has been sent to your email"),
+          content:
+              new Text("Link to verify account has been sent to your email"),
           actions: <Widget>[
             new FlatButton(
               child: new Text("Dismiss"),
@@ -106,6 +110,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _signOut() async {
+    Navigator.of(context).pop();
     try {
       await widget.auth.signOut();
       widget.onSignedOut();
@@ -117,20 +122,157 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Hello - ' + _userEmail),
-          actions: <Widget>[
+      appBar: AppBar(
+          title: Text('Home'),
+          /*actions: <Widget>[
             new FlatButton(
-                child: new Text('Logout',
-                    style: new TextStyle(fontSize: 17.0, color: Colors.white)),
-                onPressed: _signOut)
-          ],
+              child: new Text('Logout',
+                style: new TextStyle(fontSize: 17.0, color: Colors.white)),
+              onPressed: _signOut)
+          ]*/
+      ),
+      drawer: Drawer(
+          child: ListView(
+        children: <Widget>[
+          UserAccountsDrawerHeader(
+            accountName: Text(_userAccountEmail),
+            accountEmail: Text(_userAccountEmail),
+            currentAccountPicture: new CircleAvatar(
+              backgroundColor: Colors.white,
+              child: Text(_userAccountEmail.length > 0 ? _userAccountEmail[0].toUpperCase() : ""),
+            ),
+          ),
+          ListTile(
+            title: Text("Close"),
+            trailing: Icon(Icons.close),
+            onTap: ()=> Navigator.of(context).pop(),
+          ),
+          ListTile(
+            title: Text("Logout"),
+            trailing: Icon(Icons.exit_to_app),
+            onTap: _signOut
+          ),
+        ],
+      )),
+      body: new Container(
+        child: new Column(children: <Widget>[
+          _showLogo(),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0.0, 100.0, 0.0, 0.0),
+            child: new Center(
+              child: RaisedButton(
+                elevation: 5.0,
+                shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(30.0)),
+                color: Colors.blue,
+                child: Text('Startup Name Generator',
+                    style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => StartupNameGenerator()),
+                  );
+                },
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+            child: new Center(
+              child: RaisedButton(
+                elevation: 5.0,
+                shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(30.0)),
+                color: Colors.blue,
+                child: Text('Friendly Chat',
+                    style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ChatScreen(
+                              auth: widget.auth,
+                            )),
+                  );
+                },
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+            child: Center(
+              child: RaisedButton(
+                elevation: 5.0,
+                shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(30.0)),
+                color: Colors.blue,
+                child: Text('Baby Name Votes',
+                    style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BabyNameVotes()),
+                  );
+                },
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+            child: Center(
+              child: RaisedButton(
+                elevation: 5.0,
+                shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(30.0)),
+                color: Colors.blue,
+                child: Text('TodoList',
+                    style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TodoPage()),
+                  );
+                },
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+            child: Center(
+              child: RaisedButton(
+                elevation: 5.0,
+                shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(30.0)),
+                color: Colors.blue,
+                child: Text('OpenFoodFacts',
+                    style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => OpenFoodFactsPage()),
+                  );
+                },
+              ),
+            ),
+          ),
+        ]),
+      ),
+    );
+  }
+
+  Widget _showLogo() {
+    return new Hero(
+      tag: 'hero',
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(0.0, 70.0, 0.0, 0.0),
+        child: CircleAvatar(
+          backgroundColor: Colors.transparent,
+          radius: 48.0,
+          child: Image.asset('assets/flutter-icon.png'),
         ),
-        body: MainMenuPage(
-          userId: widget.userId,
-          auth: widget.auth,
-          onSignedOut: widget.onSignedOut,
-        ),
+      ),
     );
   }
 }
